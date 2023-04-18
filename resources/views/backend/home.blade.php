@@ -122,9 +122,9 @@
               </div>
               <div class="card-body">
                 <ul class="list-unstyled list-unstyled-border">
-                    @foreach($top as $tp)
+                    {{-- <img class="mr-3 rounded-circle" width="50" src="assets/admin/img/avatar/avatar-1.png" alt="avatar"> --}}
+                    {{-- @foreach($top as $tp)
                     <li class="media" >
-                      {{-- <img class="mr-3 rounded-circle" width="50" src="assets/admin/img/avatar/avatar-1.png" alt="avatar"> --}}
 
                       <div class="media-body">
                         <div class="float-right text-primary">{{ $tp->amount }} Kunjungan</div>
@@ -132,7 +132,7 @@
                         <i class="fa fa-suitcase"></i> <span class="text-small text-muted"> {{ $tp->nama_lokasi }}</span>
                       </div>
                     </li>
-                    @endforeach
+                    @endforeach --}}
                 </ul>
                 <div class="text-center pt-1 pb-1">
                   {{-- <a href="#" class="btn btn-primary btn-lg btn-round">
