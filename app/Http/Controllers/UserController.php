@@ -1,11 +1,11 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Models\indonesia_cities;
-use App\Models\indonesia_districts;
-use App\Models\indonesia_province;
-use App\Models\indonesia_villages;
+use App\Models\District;
+use App\Models\Province;
+use App\Models\Regency;
 use App\Models\User;
+use App\Models\Village;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -111,11 +111,11 @@ class UserController extends Controller
             'title'     => 'Update Biodata',
             'route'     => route('guru.update', $code),
             'method'    => 'PUT',
-            'teacher'=> User::where('code', $code)->first(),
-            'provinces'=>indonesia_province::all(),
-            'kabupatens'=>indonesia_cities::all(),
-            'kecamatans'=>indonesia_districts::all(),
-            'kelurahans'=>indonesia_villages::all(),
+            'teacher'   => User::where('code', $code)->first(),
+            'provinces' => Province::all(),
+            'kabupatens'=> Regency::all(),
+            'kecamatans'=> District::all(),
+            'kelurahans'=> Village::all(),
         ];
         return view('backend.users.editor', $edguru);
     }
@@ -193,10 +193,10 @@ class UserController extends Controller
     public function kabkota(Request $request)
     {
         $id_provinsi = $request->id_provinsi;
-        $kabupatens = indonesia_cities::where('province_code', $id_provinsi)->get();
+        $kabupatens = Regency::where('province_id', $id_provinsi)->get();
         $option = '<option>Pilih Kabupaten...</option>';
         foreach ($kabupatens as $kabupaten) {
-            $option.= "<option value='$kabupaten->code'>$kabupaten->name</option>";
+            $option.= "<option value='$kabupaten->id'>$kabupaten->name</option>";
         }
         echo $option;
     }
@@ -204,10 +204,10 @@ class UserController extends Controller
     public function kecamatan(Request $request)
     {
         $id_kabupaten = $request->id_kabupaten;
-        $kecamatans = indonesia_districts::where('city_code', $id_kabupaten)->get();
+        $kecamatans = District::where('regency_id', $id_kabupaten)->get();
         $option = '<option>Pilih Kecamatan...</option>';
         foreach ($kecamatans as $kecamatan) {
-            $option.= "<option value='$kecamatan->code'>$kecamatan->name</option>";
+            $option.= "<option value='$kecamatan->id'>$kecamatan->name</option>";
         }
         echo $option;
     }
@@ -215,10 +215,10 @@ class UserController extends Controller
     public function kelurahan(Request $request)
     {
         $id_kecamatan = $request->id_kecamatan;
-        $kelurahans = indonesia_villages::where('district_code', $id_kecamatan)->get();
+        $kelurahans = Village::where('district_id', $id_kecamatan)->get();
         $option = '<option>Pilih Kecamatan...</option>';
         foreach ($kelurahans as $kelurahan) {
-            $option.= "<option value='$kelurahan->code'>$kelurahan->name</option>";
+            $option.= "<option value='$kelurahan->id'>$kelurahan->name</option>";
         }
         echo $option;
     }
@@ -265,11 +265,11 @@ class UserController extends Controller
             'title'     => 'Update Biodata',
             'route'     => route('tatausaha.update', $code),
             'method'    => 'PUT',
-            'stafftu'=> User::where('code', $code)->first(),
-            'provinces'=>indonesia_province::all(),
-            'kabupatens'=>indonesia_cities::all(),
-            'kecamatans'=>indonesia_districts::all(),
-            'kelurahans'=>indonesia_villages::all(),
+            'stafftu'   => User::where('code', $code)->first(),
+            'provinces' => Province::all(),
+            'kabupatens'=> Regency::all(),
+            'kecamatans'=> District::all(),
+            'kelurahans'=> Village::all(),
         ];
         return view('backend.tatausaha.editor', $edtu);
     }
