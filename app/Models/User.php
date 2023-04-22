@@ -85,16 +85,16 @@ class User extends Authenticatable
 
     public function getKabkota()
     {
-        return $this->belongsTo(indonesia_cities::class, 'kabkota', 'code');
+        return $this->belongsTo(Regency::class, 'kabkota', 'id');
     }
 
     public function getKecamatan()
     {
-        return $this->belongsTo(indonesia_districts::class, 'kecamatan', 'code');
+        return $this->belongsTo(District::class, 'kecamatan', 'id');
     }
 
     public function getKelurahan()
     {
-        return $this->belongsTo(indonesia_villages::class, 'kelurahan', 'code');
+        return $this->belongsTo(Village::class, 'kelurahan', 'id');
     }
 }

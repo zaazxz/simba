@@ -1,7 +1,12 @@
 <?php
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Database\Seeders\IndoRegionRegencySeeder;
+use Database\Seeders\IndoRegionVillageSeeder;
+use Database\Seeders\IndoRegionDistrictSeeder;
+use Database\Seeders\IndoRegionProvinceSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,8 +17,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-        \App\Models\User::insert(
+        User::insert(
             [
                 [
                     'code'      => 'abc-def',
@@ -82,5 +86,10 @@ class DatabaseSeeder extends Seeder
                     'password'  => bcrypt('Guru123')
                 ]]
         );
+
+        $this->call(IndoRegionProvinceSeeder::class);
+        $this->call(IndoRegionRegencySeeder::class);
+        $this->call(IndoRegionDistrictSeeder::class);
+        $this->call(IndoRegionVillageSeeder::class);
     }
 }
