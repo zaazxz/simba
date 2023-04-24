@@ -85,11 +85,19 @@ $url = Route::current()->getName();
                                 {{-- <td>{{ $guru->nuptk }}</td> --}}
                                 <td>{{ $guru->role }}</td>
                                 <td>{{ $guru->notelp }}</td>
-                                <td><a href="{{ route('guru.status', ['code' => $guru->code]) }}">{!! $guru->status_text !!}</td>
-                                <td align = "center">
-                                    <a class="btn btn btn-warning btn-flat" data-toggle="tooltip" title='Edit' href="{{ route('guru.edit', $guru->code ?? 'test') }}"><i class="fas fa-pencil-alt"></i></a>
-                                    <a class="btn btn btn-danger btn-flat" data-toggle="tooltip" title='Delete'  href="{{ route('guru.destroy', $guru->code ?? 'test') }}"><i class="fa fa-trash"></i></a>
-                                    <a class="btn btn btn-primary btn-flat" data-toggle="tooltip" title='Detail'  href=""><i class="fa fa-info"></i></a>
+                                <td>
+                                    <a href="{{ route('guru.status', ['code' => $guru->code]) }}">{!! $guru->status_text !!}
+                                </td>
+                                <td class="text-center">
+                                    <a class="btn btn btn-warning btn-flat my-1" data-toggle="tooltip" title='Edit' href="{{ route('guru.edit', $guru->code ?? 'test') }}">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </a>
+                                    <a class="btn btn btn-danger btn-flat my-1" data-toggle="tooltip" title='Delete'  href="{{ route('guru.destroy', $guru->code ?? 'test') }}">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                    <a class="btn btn btn-primary btn-flat my-1" data-toggle="tooltip" title='Detail'  href="{{ route('guru.show', $guru->code ?? 'test') }}">
+                                        <i class="fa fa-info"></i>
+                                    </a>
                                 </td>
                             </tr>
                             @endforeach
