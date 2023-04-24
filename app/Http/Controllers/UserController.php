@@ -94,9 +94,17 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($code)
     {
-        //
+        $data=[
+            'title'     => 'Update Biodata',
+            'teacher'   => User::where('code', $code)->first(),
+            'provinces' => Province::where('id', $code)->first(),
+            'kabupatens'=> Regency::all(),
+            'kecamatans'=> District::all(),
+            'kelurahans'=> Village::all(),
+        ];
+        return view('backend.users.show', $data);
     }
 
     /**

@@ -35,6 +35,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/aktif', [UserController::class, 'aktif'])->name('guru.aktif');
         Route::get('/edit/{code}', [UserController::class, 'edit'])->name('guru.edit');
         Route::put('/update/{code}', [UserController::class, 'update'])->name('guru.update');
+        Route::get('/show/{code}', [UserController::class, 'show'])->name('guru.show');
         Route::get('/pending', [UserController::class, 'pending'])->name('guru.pending');
         Route::get('/aktif', [UserController::class, 'aktif'])->name('guru.aktif');
         Route::get('/create', [UserController::class, 'create'])->name('guru.create');
