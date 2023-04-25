@@ -29,6 +29,7 @@ Route::post('/getkelurahan', [UserController::class, 'kelurahan'])->name('getkel
 
 Route::group(['middleware' => 'auth'], function () {
     Route::prefix('gtk')->group(function () {
+
         // Route for Guru
         Route::get('/guru', [UserController::class, 'index'])->name('guru.index');
         Route::get('/non', [UserController::class, 'nonaktif'])->name('guru.non');
@@ -42,6 +43,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/store', [UserController::class, 'store'])->name('guru.store');
         Route::get('/delete/{code}', [UserController::class, 'destroy'])->name('guru.destroy');
         Route::get('/status/{code}', [UserController::class, 'status'])->name('guru.status');
+
         // Route for Tata Usaha
         Route::get('/stu', [UserController::class, 'tatausaha'])->name('tatausaha.index');
         Route::get('/tu_non', [UserController::class, 'tu_nonaktif'])->name('tatausaha.non');
@@ -50,6 +52,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::put('/updatetu/{code}', [UserController::class, 'stu_update'])->name('tatausaha.update');
         Route::get('/deletetu/{code}', [UserController::class, 'stu_destroy'])->name('tatausaha.destroy');
         Route::get('/statustu/{code}', [UserController::class, 'stu_status'])->name('tatausaha.status');
+
     });
 
     Route::prefix('jadwal')->group(function () {

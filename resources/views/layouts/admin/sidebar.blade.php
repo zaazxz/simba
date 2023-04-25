@@ -48,9 +48,6 @@
                             <li class="{{ str_contains($url, 'mapel') ? 'active' : '' }}">
                                 <a class="nav-link" href="#">Mata Pelajaran</a>
                             </li>
-                            <li class="{{ str_contains($url, 'gurumapel') ? 'active' : '' }}">
-                                <a class="nav-link" href="#">Guru Mata Pelajaran</a>
-                            </li>
                             <li class="{{ str_contains($url, 'kelas') ? 'active' : '' }}">
                                 <a class="nav-link" href="#">Kelas</a>
                             </li>
