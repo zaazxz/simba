@@ -19,7 +19,7 @@ class AdminSeeder extends Seeder
         DB::table('users')->insert([
             [
                 'code'              => Str::random(7),
-                'kelas_id'          => '',
+                'kelas_id'          => NULL,
                 'name'              => 'Administrator',
                 'email'             => 'admin@iotech.id',
                 'uid'               => '1',

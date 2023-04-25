@@ -110,6 +110,6 @@ class User extends Authenticatable
     }
 
     public function kelas() {
-        return $this->belongsTo(Kelas::class, 'kelas_id', 'id');
+        return $this->BelongsTo(Kelas::class, 'kelas_id', 'id');
     }
 }
