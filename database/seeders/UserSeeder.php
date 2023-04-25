@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             [
                 'code'              => Str::random(7),
+                'kelas_id'          => '1',
                 'name'              => 'ANAN S.Pd.I',
                 'email'             => 'anan06@guru.smp.belajar.id',
                 'uid'               => '2',
@@ -44,6 +45,7 @@ class UserSeeder extends Seeder
             ],
             [
                 'code'              => Str::random(7),
+                'kelas_id'          => NULL,
                 'name'              => 'REGI ROCHMANSYAH, S.Sos',
                 'email'             => 'regirochmansyah51@guru.smp.belajar.id',
                 'uid'               => '3',

@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use App\Models\Kelas;
 use App\Models\Regency;
 use App\Models\Village;
 use App\Models\District;
@@ -21,12 +22,13 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'code'
-    ];
+    // protected $fillable = [
+    //     'name',
+    //     'email',
+    //     'password',
+    //     'code'
+    // ];
+    protected $guarded = ['id'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -105,5 +107,9 @@ class User extends Authenticatable
     public function getKelurahan()
     {
         return $this->belongsTo(Village::class, 'kelurahan', 'id');
+    }
+
+    public function kelas() {
+        return $this->BelongsTo(Kelas::class, 'kelas_id', 'id');
     }
 }

@@ -34,6 +34,7 @@ class CreateUsersTable extends Migration
             $table->string('kecamatan')->nullable();
             $table->string('kelurahan')->nullable();
             $table->string('notelp')->nullable();
+            $table->string('kelas_id')->nullable();
             $table->string('photo')->default('avatar-1.png');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
