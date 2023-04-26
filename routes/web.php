@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\JadwalController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\MapelController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\MapelController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\JadwalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,25 +23,28 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::post('/getkabupaten', [UserController::class, 'kabkota'])->name('getkabupaten');
 Route::post('/getkecamatan', [UserController::class, 'kecamatan'])->name('getkecamatan');
 Route::post('/getkelurahan', [UserController::class, 'kelurahan'])->name('getkelurahan');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::prefix('gtk')->group(function () {
+
         // Route for Guru
         Route::get('/guru', [UserController::class, 'index'])->name('guru.index');
         Route::get('/non', [UserController::class, 'nonaktif'])->name('guru.non');
         Route::get('/aktif', [UserController::class, 'aktif'])->name('guru.aktif');
         Route::get('/edit/{code}', [UserController::class, 'edit'])->name('guru.edit');
         Route::put('/update/{code}', [UserController::class, 'update'])->name('guru.update');
+        Route::get('/show/{code}', [UserController::class, 'show'])->name('guru.show');
         Route::get('/pending', [UserController::class, 'pending'])->name('guru.pending');
         Route::get('/aktif', [UserController::class, 'aktif'])->name('guru.aktif');
         Route::get('/create', [UserController::class, 'create'])->name('guru.create');
         Route::post('/store', [UserController::class, 'store'])->name('guru.store');
         Route::get('/delete/{code}', [UserController::class, 'destroy'])->name('guru.destroy');
         Route::get('/status/{code}', [UserController::class, 'status'])->name('guru.status');
+
         // Route for Tata Usaha
         Route::get('/stu', [UserController::class, 'tatausaha'])->name('tatausaha.index');
         Route::get('/tu_non', [UserController::class, 'tu_nonaktif'])->name('tatausaha.non');
@@ -49,6 +53,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::put('/updatetu/{code}', [UserController::class, 'stu_update'])->name('tatausaha.update');
         Route::get('/deletetu/{code}', [UserController::class, 'stu_destroy'])->name('tatausaha.destroy');
         Route::get('/statustu/{code}', [UserController::class, 'stu_status'])->name('tatausaha.status');
+
         // Route Mapel
         Route::get('/mapel', [MapelController::class, 'index'])->name('mapel.index');
         // Route::get('/non', [UserController::class, 'nonaktif'])->name('guru.non');
@@ -61,6 +66,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/store_mapel', [MapelController::class, 'store'])->name('mapel.store');
         // Route::get('/delete/{code}', [UserController::class, 'destroy'])->name('guru.destroy');
         Route::get('/status_mapel/{code}', [MapelController::class, 'status'])->name('mapel.status');
+
     });
 
     Route::prefix('jadwal')->group(function () {
