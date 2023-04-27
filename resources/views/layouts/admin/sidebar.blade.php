@@ -46,7 +46,7 @@
                                 <a class="nav-link" href="{{ route('tatausaha.index') }}">Tata Usaha</a>
                             </li>
                             <li class="{{ str_contains($url, 'mapel') ? 'active' : '' }}">
-                                <a class="nav-link" href="#">Mata Pelajaran</a>
+                                <a class="nav-link" href="{{ route('mapel.index') }}">Mata Pelajaran</a>
                             </li>
                             <li class="{{ str_contains($url, 'kelas') ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ route('kelas.index') }}">Kelas</a>
