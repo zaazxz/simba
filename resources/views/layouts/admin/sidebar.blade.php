@@ -29,7 +29,7 @@
                     str_contains($url, 'guru') ||
                     str_contains($url, 'jadwal') ||
                     str_contains($url, 'mapel') ||
-                    str_contains($url, 'statement3') ||
+                    str_contains($url, 'kelas') ||
                     str_contains($url, 'statement4')
                         ? 'show active'
                         : '' }}">
@@ -49,7 +49,7 @@
                                 <a class="nav-link" href="#">Mata Pelajaran</a>
                             </li>
                             <li class="{{ str_contains($url, 'kelas') ? 'active' : '' }}">
-                                <a class="nav-link" href="#">Kelas</a>
+                                <a class="nav-link" href="{{ route('kelas.index') }}">Kelas</a>
                             </li>
                         @endif
 
