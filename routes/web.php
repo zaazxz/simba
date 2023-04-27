@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\MapelController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
@@ -53,6 +54,19 @@ Route::group(['middleware' => 'auth'], function () {
         Route::put('/updatetu/{code}', [UserController::class, 'stu_update'])->name('tatausaha.update');
         Route::get('/deletetu/{code}', [UserController::class, 'stu_destroy'])->name('tatausaha.destroy');
         Route::get('/statustu/{code}', [UserController::class, 'stu_status'])->name('tatausaha.status');
+
+        // Route Mapel
+        Route::get('/mapel', [MapelController::class, 'index'])->name('mapel.index');
+        // Route::get('/non', [UserController::class, 'nonaktif'])->name('guru.non');
+        // Route::get('/aktif', [UserController::class, 'aktif'])->name('guru.aktif');
+        Route::get('/edit_mapel', [MapelController::class, 'edit'])->name('mapel.edit');
+        // Route::put('/update/{code}', [UserController::class, 'update'])->name('guru.update');
+        // Route::get('/pending', [UserController::class, 'pending'])->name('guru.pending');
+        // Route::get('/aktif', [UserController::class, 'aktif'])->name('guru.aktif');
+        Route::get('/create_mapel', [MapelController::class, 'create'])->name('mapel.create');
+        Route::post('/store_mapel', [MapelController::class, 'store'])->name('mapel.store');
+        // Route::get('/delete/{code}', [UserController::class, 'destroy'])->name('guru.destroy');
+        Route::get('/status_mapel/{code}', [MapelController::class, 'status'])->name('mapel.status');
 
     });
 
