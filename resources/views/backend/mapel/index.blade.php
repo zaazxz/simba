@@ -1,9 +1,9 @@
 @extends('layouts.admin.app')
 @section('title','Mata Pelajaran')
 @section ('content')
-{{-- @php
+@php
 $url = Route::current()->getName();
-@endphp --}}
+@endphp
 <div class="main-content" style="min-height: 555px;">
         <section class="section">
           <div class="section-header">
@@ -56,7 +56,7 @@ $url = Route::current()->getName();
                   <div class="card-body">
                     <div class="clearfix mb-3"></div>
                     <div class="table-responsive">
-                    <table id="table_id" class="display" style="width: 100%">
+                    <table id="table_id1" class="display" style="width: 100%">
                         <thead>
                             <tr>
                             <th>ID</th>
@@ -102,7 +102,7 @@ $url = Route::current()->getName();
 @section('script')
 <script>
     $(document).ready(function() {
-    $('#table_id').DataTable(
+    $('#table_id1').DataTable(
         {
         dom: 'Bfrtip',
         buttons: [

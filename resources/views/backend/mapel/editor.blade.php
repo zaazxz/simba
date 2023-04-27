@@ -1,9 +1,9 @@
 @extends('layouts.admin.app')
 @section('title','Update Mata Pelajaran')
 @section ('content')
-{{-- @php
+@php
 $url = Route::current()->getName();
-@endphp --}}
+@endphp
 
 <div class="main-content" style="min-height: 554px;">
     <section class="section">
