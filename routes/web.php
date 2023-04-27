@@ -83,7 +83,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/store', [KelasController::class, 'store'])->name('kelas.store');
         Route::get('/aktif', [KelasController::class, 'aktif'])->name('kelas.aktif');
         Route::get('/pending', [KelasController::class, 'pending'])->name('kelas.pending');
-        Route::get('/show/{code}', [KelasController::class, 'show'])->name('kelas.show');
         Route::get('/edit/{code}', [KelasController::class, 'edit'])->name('kelas.edit');
         Route::get('/update{code}', [KelasController::class, 'update'])->name('kelas.update');
         Route::get('/destroy{code}', [KelasController::class, 'destroy'])->name('kelas.destroy');

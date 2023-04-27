@@ -45,7 +45,7 @@ class UserSeeder extends Seeder
             ],
             [
                 'code'              => Str::random(7),
-                'kelas_id'          => NULL,
+                'kelas_id'          => '2',
                 'name'              => 'REGI ROCHMANSYAH, S.Sos',
                 'email'             => 'regirochmansyah51@guru.smp.belajar.id',
                 'uid'               => '3',

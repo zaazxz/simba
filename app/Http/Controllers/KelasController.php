@@ -58,69 +58,41 @@ class KelasController extends Controller
         return redirect()->route('kelas.index')->withSuccess('Status berhasil diubah');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // Halaman Tambah Data Kelas
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    // Insert Data
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Kelas  $kelas
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Kelas $kelas)
+    // Halaman Ubah Data Kelas
+    public function edit($code)
     {
-        //
+        $edit_kelas=[
+            'title'         => 'Update Kelas',
+            'route'         => route('kelas.update', $code),
+            'method'        => 'PUT',
+            'classrooms'    => User::where('code', $code)->first(),
+        ];
+        return view('backend.kelas.edit', $edit_kelas);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Kelas  $kelas
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Kelas $kelas)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Kelas  $kelas
-     * @return \Illuminate\Http\Response
-     */
+    // Update Data
     public function update(Request $request, Kelas $kelas)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Kelas  $kelas
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Kelas $kelas)
+    // Delete Data
+    public function destroy($code)
     {
-        //
+        $kelas = Kelas::where('code', $code);
+        $kelas->delete();
+        return back()->with('message', 'Kelas berhasil dihapus');
     }
 }
