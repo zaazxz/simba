@@ -47,7 +47,9 @@ $url = Route::current()->getName();
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label for="first-name-vertical">Keterangan</label>
+                                            <label for="body">Keterangan</label>
+                                            <input id="body" type="hidden" name="body">
+                                        <trix-editor input="body"></trix-editor>
                                         </div>
                                     </div>
                                     <div class="col-12">
