@@ -198,39 +198,6 @@ class UserController extends Controller
         return redirect()->route('guru.index')->withSuccess('Status berhasil diubah');
     }
 
-    public function kabkota(Request $request)
-    {
-        $id_provinsi = $request->id_provinsi;
-        $kabupatens = Regency::where('province_id', $id_provinsi)->get();
-        $option = '<option>Pilih Kabupaten...</option>';
-        foreach ($kabupatens as $kabupaten) {
-            $option.= "<option value='$kabupaten->id'>$kabupaten->name</option>";
-        }
-        echo $option;
-    }
-
-    public function kecamatan(Request $request)
-    {
-        $id_kabupaten = $request->id_kabupaten;
-        $kecamatans = District::where('regency_id', $id_kabupaten)->get();
-        $option = '<option>Pilih Kecamatan...</option>';
-        foreach ($kecamatans as $kecamatan) {
-            $option.= "<option value='$kecamatan->id'>$kecamatan->name</option>";
-        }
-        echo $option;
-    }
-
-    public function kelurahan(Request $request)
-    {
-        $id_kecamatan = $request->id_kecamatan;
-        $kelurahans = Village::where('district_id', $id_kecamatan)->get();
-        $option = '<option>Pilih Kecamatan...</option>';
-        foreach ($kelurahans as $kelurahan) {
-            $option.= "<option value='$kelurahan->id'>$kelurahan->name</option>";
-        }
-        echo $option;
-    }
-
     public function tatausaha()
     {
         $dtu=[
@@ -334,5 +301,38 @@ class UserController extends Controller
         $tu->status = $tu->status == '0' ? '1' : $tu->status = '0';
         $tu->save();
         return redirect()->route('tatausaha.index')->withSuccess('Status berhasil diubah');
+    }
+
+    public function kabkota(Request $request)
+    {
+        $id_provinsi = $request->id_provinsi;
+        $kabupatens = Regency::where('province_id', $id_provinsi)->get();
+        $option = '<option>Pilih Kabupaten...</option>';
+        foreach ($kabupatens as $kabupaten) {
+            $option.= "<option value='$kabupaten->id'>$kabupaten->name</option>";
+        }
+        echo $option;
+    }
+
+    public function kecamatan(Request $request)
+    {
+        $id_kabupaten = $request->id_kabupaten;
+        $kecamatans = District::where('regency_id', $id_kabupaten)->get();
+        $option = '<option>Pilih Kecamatan...</option>';
+        foreach ($kecamatans as $kecamatan) {
+            $option.= "<option value='$kecamatan->id'>$kecamatan->name</option>";
+        }
+        echo $option;
+    }
+
+    public function kelurahan(Request $request)
+    {
+        $id_kecamatan = $request->id_kecamatan;
+        $kelurahans = Village::where('district_id', $id_kecamatan)->get();
+        $option = '<option>Pilih Kecamatan...</option>';
+        foreach ($kelurahans as $kelurahan) {
+            $option.= "<option value='$kelurahan->id'>$kelurahan->name</option>";
+        }
+        echo $option;
     }
 }

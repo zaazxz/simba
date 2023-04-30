@@ -85,7 +85,9 @@ $url = Route::current()->getName();
                                 <td align = "center">
                                     <a class="btn btn btn-warning btn-flat" data-toggle="tooltip" title='Edit' href="{{ route('tatausaha.edit', $stu->code ?? 'test') }}"><i class="fas fa-pencil-alt"></i></a>
                                     <a class="btn btn btn-danger btn-flat" data-toggle="tooltip" title='Delete'  href="{{ route('tatausaha.destroy', $stu->code ?? 'test') }}"><i class="fa fa-trash"></i></a>
-                                    <a class="btn btn btn-primary btn-flat" data-toggle="tooltip" title='Detail'  href=""><i class="fa fa-info"></i></a>
+                                    <a class="btn btn btn-primary btn-flat my-1" data-toggle="tooltip" title='Detail'  href="{{ route('guru.show', $stu->code ?? 'test') }}">
+                                        <i class="fa fa-info"></i>
+                                    </a>
                                 </td>
                             </tr>
                             @endforeach

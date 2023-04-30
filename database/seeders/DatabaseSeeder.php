@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(AdminSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(TataUsahaSeeder::class);
         $this->call(KelasSeeder::class);
         $this->call(IndoRegionProvinceSeeder::class);
         $this->call(IndoRegionRegencySeeder::class);
