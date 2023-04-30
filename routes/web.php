@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\KelasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,9 +25,12 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+// Ajax Jquery
 Route::post('/getkabupaten', [UserController::class, 'kabkota'])->name('getkabupaten');
 Route::post('/getkecamatan', [UserController::class, 'kecamatan'])->name('getkecamatan');
 Route::post('/getkelurahan', [UserController::class, 'kelurahan'])->name('getkelurahan');
+Route::post('/getunit', [KelasController::class, 'unit'])->name('getunit');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::prefix('gtk')->group(function () {
@@ -75,4 +79,17 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/tommorow', [JadwalController::class, 'besok'])->name('jadwal.tommorow');
         Route::post('/import', [JadwalController::class, 'import'])->name('jadwal.import');
     });
+
+    Route::prefix('kelas')->group(function() {
+        Route::get('/', [KelasController::class, 'index'])->name('kelas.index');
+        Route::get('/create', [KelasController::class, 'create'])->name('kelas.create');
+        Route::get('/store', [KelasController::class, 'store'])->name('kelas.store');
+        Route::get('/aktif', [KelasController::class, 'aktif'])->name('kelas.aktif');
+        Route::get('/pending', [KelasController::class, 'pending'])->name('kelas.pending');
+        Route::get('/edit/{code}', [KelasController::class, 'edit'])->name('kelas.edit');
+        Route::get('/update{code}', [KelasController::class, 'update'])->name('kelas.update');
+        Route::get('/destroy{code}', [KelasController::class, 'destroy'])->name('kelas.destroy');
+        Route::get('/status/{code}', [KelasController::class, 'status'])->name('kelas.status');
+    });
+
 });

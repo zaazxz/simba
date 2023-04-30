@@ -16,8 +16,10 @@ class CreateKelasTable extends Migration
         Schema::create('kelas', function (Blueprint $table) {
             $table->id();
             $table->uuid('code')->unique();
-            $table->foreignId('walikelas_id')->nullable();
+            $table->string('walikelas_id')->nullable();
             $table->string('nama');
+            $table->enum('unit', ['SD Bakti Nusantara 666', 'SMP Bakti Nusantara 666', 'SMK Bakti Nusantara 666', 'YPDM Bakti Nusantara 666']);
+            $table->string('km')->nullable();
             $table->string('telp_km')->nullable();
             $table->boolean('status')->default(0);
             $table->timestamps();

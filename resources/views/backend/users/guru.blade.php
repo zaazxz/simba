@@ -71,7 +71,7 @@ $url = Route::current()->getName();
                             <th> Jabatan </th>
                             <th> No Telp </th>
                             <th> Kelas </th>
-                            <th> Status </th>
+                            {{-- <th> Status </th> --}}
                             <th> </th>
                             </tr>
                         </thead>
@@ -86,7 +86,7 @@ $url = Route::current()->getName();
                                 {{-- <td>{{ $guru->nuptk }}</td> --}}
                                 <td>{{ $guru->role }}</td>
                                 <td>{{ $guru->notelp }}</td>
-                                <td>{{ $guru->kelas->nama ?? 'unknown' }}</td>
+                                {{-- <td>{{ $guru->kelas->nama ?? 'unknown' }}</td> --}}
                                 <td>
                                     <a href="{{ route('guru.status', ['code' => $guru->code]) }}">{!! $guru->status_text !!}
                                 </td>
