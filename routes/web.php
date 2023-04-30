@@ -25,9 +25,12 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+// Ajax Jquery
 Route::post('/getkabupaten', [UserController::class, 'kabkota'])->name('getkabupaten');
 Route::post('/getkecamatan', [UserController::class, 'kecamatan'])->name('getkecamatan');
 Route::post('/getkelurahan', [UserController::class, 'kelurahan'])->name('getkelurahan');
+Route::post('/getunit', [KelasController::class, 'unit'])->name('getunit');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::prefix('gtk')->group(function () {

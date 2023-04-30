@@ -17,20 +17,12 @@ class KelasSeeder extends Seeder
     {
         DB::table('kelas')->insert([
             [
-                'code' => Str::random(5),
-                'walikelas_id' => '1',
-                'nama' => 'IX A',
-                'km' => 'Achyara Narasya Marlanda',
-                'unit' => 'SMP Bakti Nusantara 666',
-                'telp_km' => '089681238317'
-            ],
-            [
-                'code' => Str::random(5),
-                'walikelas_id' => '2',
-                'nama' => 'IX B',
-                'km' => 'Kelea',
-                'unit' => 'SMK Bakti Nusantara 666',
-                'telp_km' => '089681238317'
+                'code'          => Str::random(5),
+                'walikelas_id'  => '2',
+                'nama'          => 'IX A',
+                'km'            => 'Achyara Narasya Marlanda',
+                'unit'          => 'SMP Bakti Nusantara 666',
+                'telp_km'       => '089681238317'
             ],
         ]);
     }

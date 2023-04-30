@@ -9,40 +9,40 @@ use App\Http\Controllers\Controller;
 
 class KelasController extends Controller
 {
-    
+
     // Halaman Kelas
     public function index()
     {
         $data=[
             'title'                 => 'Daftar Kelas',
-            'classrooms'            => Kelas::all(), 
-            'classrooms_all'        => Kelas::count(), 
+            'classrooms'            => Kelas::all(),
+            'classrooms_all'        => Kelas::count(),
             'classrooms_active'     => Kelas::where('status', '=', '1')->count(),
             'classrooms_deactive'   => Kelas::where('status', '=', '0')->count(),
         ];
         return view('backend.kelas.index', $data);
     }
-    
+
     // Halaman Kelas Aktif
     public function aktif()
     {
         $data=[
             'title'                 => 'Daftar Kelas Aktif',
-            'classrooms'            => Kelas::where('status', '=', '1')->get(), 
-            'classrooms_all'        => Kelas::count(), 
+            'classrooms'            => Kelas::where('status', '=', '1')->get(),
+            'classrooms_all'        => Kelas::count(),
             'classrooms_active'     => Kelas::where('status', '=', '1')->count(),
             'classrooms_deactive'   => Kelas::where('status', '=', '0')->count(),
         ];
         return view('backend.kelas.index', $data);
     }
-    
+
     // Halaman Kelas Pending
     public function pending()
     {
         $data=[
             'title'                 => 'Daftar Kelas Pending',
-            'classrooms'            => Kelas::where('status', '=', '0')->get(), 
-            'classrooms_all'        => Kelas::count(), 
+            'classrooms'            => Kelas::where('status', '=', '0')->get(),
+            'classrooms_all'        => Kelas::count(),
             'classrooms_active'     => Kelas::where('status', '=', '1')->count(),
             'classrooms_deactive'   => Kelas::where('status', '=', '0')->count(),
         ];
@@ -59,9 +59,15 @@ class KelasController extends Controller
     }
 
     // Halaman Tambah Data Kelas
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $wakel = $request->unit;
+        $data = [
+            'title' => 'Tambah Kelas',
+            'kelas' => Kelas::all(),
+            'teachers' => User::where('role', '=', 'Guru')->where('unit', '=', $wakel)->get(),
+        ];
+        return view('backend.kelas.create', $data);
     }
 
     // Insert Data
@@ -95,4 +101,17 @@ class KelasController extends Controller
         $kelas->delete();
         return back()->with('message', 'Kelas berhasil dihapus');
     }
+
+    // Function
+    public function unit(Request $request)
+    {
+        $unit = $request->unit;
+        $teachers = User::where('unit', $unit)->where('role', 'Guru')->get();
+        $option = '<option>Pilih Wali Kelas</option>';
+        foreach ($teachers as $teacher) {
+            $option.= "<option value='$teacher->id'>$teacher->name</option>";
+        }
+        echo $option;
+    }
+
 }
