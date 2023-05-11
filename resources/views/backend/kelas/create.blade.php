@@ -26,7 +26,7 @@
 
                 <div class="card">
                     <div class="card-body">
-                        <form class="form form-vertical" method="post" action="">
+                        <form class="form form-vertical" method="POST" action="{{ route('kelas.store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="form-body">
                                 <div class="row">
@@ -56,8 +56,8 @@
                                     <div class="col-12 col-md-6">
                                         <div class="form-group">
                                             <label for="first-name-vertical">Wali Kelas</label>
-                                            <select class="form-control">
-                                                <option value="">{{ 'Pilih Wali Kelas...' }}</option>
+                                            <select class="form-control" id="wakel" name="walikelas_id">
+                                                <option value="">Pilih Guru...</option>
                                             </select>
                                         </div>
                                     </div>
@@ -65,14 +65,14 @@
                                         <div class="form-group">
                                             <label for="first-name-vertical">Nama Ketua Murid</label>
                                             <input type="text" id="first-name-vertical" class="form-control"
-                                                name="diskon" placeholder="Masukkan" value="{{ old('diskon') }}" autofocus>
+                                                name="km" placeholder="Masukkan" value="{{ old('diskon') }}" autofocus>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="form-group">
                                             <label for="first-name-vertical">Nomor Telepon ketua Murid</label>
                                             <input type="text" id="first-name-vertical" class="form-control"
-                                                name="diskon" placeholder="Masukkan" value="{{ old('diskon') }}" autofocus>
+                                                name="telp_km" placeholder="Masukkan" value="{{ old('diskon') }}" autofocus>
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -103,11 +103,11 @@
                     console.log(unit);
                     $.ajax({
                         type: "POST",
-                        url: "{{ route('getunit') }}",
-                        data: {unit: unit},
+                        url: "{{ route('getwakel') }}",
+                        data: {unit:unit},
                         cache: false,
                         success: function(msg) {
-                            $('#unit').html(msg);
+                            $('#wakel').html(msg);
                         },
                         error: function(data) {
                             console.log('error:', data);

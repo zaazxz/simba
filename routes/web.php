@@ -30,7 +30,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::post('/getkabupaten', [UserController::class, 'kabkota'])->name('getkabupaten');
 Route::post('/getkecamatan', [UserController::class, 'kecamatan'])->name('getkecamatan');
 Route::post('/getkelurahan', [UserController::class, 'kelurahan'])->name('getkelurahan');
-Route::post('/getunit', [KelasController::class, 'unit'])->name('getunit');
+Route::post('/getunit', [KelasController::class, 'wakel'])->name('getwakel');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::prefix('gtk')->group(function () {
@@ -83,7 +83,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::prefix('kelas')->group(function() {
         Route::get('/', [KelasController::class, 'index'])->name('kelas.index');
         Route::get('/create', [KelasController::class, 'create'])->name('kelas.create');
-        Route::get('/store', [KelasController::class, 'store'])->name('kelas.store');
+        Route::post('/store', [KelasController::class, 'store'])->name('kelas.store');
         Route::get('/aktif', [KelasController::class, 'aktif'])->name('kelas.aktif');
         Route::get('/pending', [KelasController::class, 'pending'])->name('kelas.pending');
         Route::get('/edit/{code}', [KelasController::class, 'edit'])->name('kelas.edit');

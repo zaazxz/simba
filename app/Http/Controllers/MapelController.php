@@ -29,8 +29,8 @@ class MapelController extends Controller
     public function create()
     {
         $data=[
-            'title'=>'BUAT MATA PELAJARAN BARU',
-            'teks'=>'Dihalaman ini anda dapat menambahkan mata pelajaran',
+            'title' =>'BUAT MATA PELAJARAN BARU',
+            'teks'  =>'Dihalaman ini anda dapat menambahkan mata pelajaran',
             'method'=>'POST',
             'route' => route('mapel.store'),
             //14 Juli 2005
