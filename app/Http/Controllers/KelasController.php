@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Kelas;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Builder;
 
 class KelasController extends Controller
 {
@@ -73,7 +76,16 @@ class KelasController extends Controller
     // Insert Data
     public function store(Request $request)
     {
-        //
+        $kelas                  = new Kelas();
+        $kelas->code            = Str::random(10);
+        $kelas->walikelas_id    = $request->walikelas_id;
+        $kelas->nama            = $request->nama;
+        $kelas->unit            = $request->unit;
+        $kelas->km              = $request->km;
+        $kelas->telp_km         = $request->telp_km;
+        $kelas->status          = 0;
+        $kelas->save();
+        return redirect()->route('kelas.index')->with('message', 'Input Data GTK baru berhasil dibuat');
     }
 
     // Halaman Ubah Data Kelas
@@ -103,11 +115,13 @@ class KelasController extends Controller
     }
 
     // Function
-    public function unit(Request $request)
+    public function wakel(Request $request)
     {
+        $wakel = DB::table('kelas')->select('walikelas_id');
         $unit = $request->unit;
-        $teachers = User::where('unit', $unit)->where('role', 'Guru')->get();
-        $option = '<option>Pilih Wali Kelas</option>';
+        $teachers = User::where('role', 'Guru')->where('unit', $unit)->whereNotIn('id', $wakel)
+                        ->orWhere('role', 'Guru')->where('unit2', $unit)->whereNotIn('id', $wakel)->get();
+        $option = '<option>Pilih asw...</option>';
         foreach ($teachers as $teacher) {
             $option.= "<option value='$teacher->id'>$teacher->name</option>";
         }
