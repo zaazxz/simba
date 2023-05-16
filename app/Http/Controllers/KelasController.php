@@ -62,9 +62,8 @@ class KelasController extends Controller
     }
 
     // Halaman Tambah Data Kelas
-    public function create(Request $request)
+    public function create()
     {
-        $wakel = $request->unit;
         $data = [
             'title'     => 'Tambah Kelas',
             'kelas'     => Kelas::all(),
@@ -101,9 +100,24 @@ class KelasController extends Controller
     }
 
     // Update Data
-    public function update(Request $request, Kelas $kelas)
+    public function update(Request $request, $code)
     {
-        //
+        $edit = Kelas::where('code', $code)->first();
+        $edit->code         = $request->code;
+        $edit->walikelas_id = $request->walikelas_id;
+        $edit->nama         = $request->nama;
+        $edit->unit         = $request->unit;
+        $edit->km           = $request->km;
+        $edit->telp_km      = $request->telp_km;
+        $edit->jurusan      = $request->jurusan;
+        $edit->save();
+
+        if ($edit) {
+            return redirect()->route('kelas.index')->with('message', 'Kelas berhasil diupdate');
+        } else {
+            return redirect()->route('kelas.index')->with('message', 'Kelas gagal diupdate');
+        }
+
     }
 
     // Delete Data

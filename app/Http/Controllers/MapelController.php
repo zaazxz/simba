@@ -53,6 +53,7 @@ class MapelController extends Controller
         ]);
 
         Mapel::create($data);
+
         if ($data) {
         return redirect()->route('mapel.index')->with('message', 'Mata Pelajaran baru berhasil dibuat');
         } else {
@@ -61,17 +62,37 @@ class MapelController extends Controller
 
     }
 
-    public function edit()
+    public function edit($code)
     {
         $data=[
-            'title'     =>'BUAT MATA PELAJARAN BARU',
-            'teks'      =>'Dihalaman ini anda dapat menambahkan mata pelajaran',
+            'title'     =>'EDIT PELAJARAN BARU',
+            'teks'      =>'Dihalaman ini anda dapat mengubah mata pelajaran',
             'method'    =>'POST',
+            'mapels'    => Mapel::where('code', $code)->first(),
             'guru'      => User::where('role', 'guru')->where('status', 1)->get(),
             'kelas'     => Kelas::where('status', 1)->get(),
-            'route'     => route('mapel.update'),
+            'route'     => route('mapel.update', $code),
         ];
         return view('backend.mapel.edit', $data);
+    }
+
+    public function update(Request $request, $code)
+    {
+        $edit = Mapel::where('code', $code)->first();
+        $edit->code         = $request->code;
+        $edit->code_mapel   = $request->code_mapel;
+        $edit->nama         = $request->nama;
+        $edit->kelas_id     = $request->kelas_id;
+        $edit->guru_id      = $request->guru_id;
+        $edit->keterangan   = $request->keterangan;
+        $edit->save();
+
+        if ($edit) {
+            return redirect()->route('mapel.index')->with('message', 'Mapel berhasil diupdate');
+        } else {
+            return redirect()->route('mapel.index')->with('message', 'Mapel gagal diupdate');
+        }
+
     }
 
     public function status($code)
