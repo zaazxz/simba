@@ -66,9 +66,9 @@ class KelasController extends Controller
     {
         $wakel = $request->unit;
         $data = [
-            'title' => 'Tambah Kelas',
-            'kelas' => Kelas::all(),
-            'teachers' => User::where('role', '=', 'Guru')->where('unit', '=', $wakel)->get(),
+            'title'     => 'Tambah Kelas',
+            'kelas'     => Kelas::all(),
+            'teachers'  => User::where('role', '=', 'Guru')->get(),
         ];
         return view('backend.kelas.create', $data);
     }
@@ -95,7 +95,7 @@ class KelasController extends Controller
             'title'         => 'Update Kelas',
             'route'         => route('kelas.update', $code),
             'method'        => 'PUT',
-            'classrooms'    => User::where('code', $code)->first(),
+            'classrooms'    => Kelas::where('code', $code)->first()
         ];
         return view('backend.kelas.edit', $edit_kelas);
     }
@@ -121,6 +121,22 @@ class KelasController extends Controller
         $unit = $request->unit;
         $teachers = User::where('role', 'Guru')->where('unit', $unit)->whereNotIn('id', $wakel)
                         ->orWhere('role', 'Guru')->where('unit2', $unit)->whereNotIn('id', $wakel)->get();
+        $option = '<option>Pilih asw...</option>';
+        foreach ($teachers as $teacher) {
+            $option.= "<option value='$teacher->id'>$teacher->name</option>";
+        }
+        echo $option;
+    }
+
+    public function wakelUpdate(Request $request)
+    {
+        $wakel = DB::table('kelas')->select('walikelas_id');
+        $unit = $request->unit;
+        $walas = $request->walas;
+        $teachers = User::where('role', 'Guru')->where('unit', $unit)->whereNotIn('id', $wakel)
+                        ->orWhere('role', 'Guru')->where('unit2', $unit)->whereNotIn('id', $wakel)
+                        ->orWhere('role', 'Guru')->where('unit', $unit)->where('id', $walas)
+                        ->orWhere('role', 'Guru')->where('unit2', $unit)->where('id', $walas)->get();
         $option = '<option>Pilih asw...</option>';
         foreach ($teachers as $teacher) {
             $option.= "<option value='$teacher->id'>$teacher->name</option>";

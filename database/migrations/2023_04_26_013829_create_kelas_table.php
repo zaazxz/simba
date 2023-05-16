@@ -18,6 +18,7 @@ class CreateKelasTable extends Migration
             $table->uuid('code')->unique();
             $table->string('walikelas_id')->nullable();
             $table->string('nama');
+            $table->string('jurusan')->nullable();
             $table->enum('unit', ['SD Bakti Nusantara 666', 'SMP Bakti Nusantara 666', 'SMK Bakti Nusantara 666', 'YPDM Bakti Nusantara 666']);
             $table->string('km')->nullable();
             $table->string('telp_km')->nullable();

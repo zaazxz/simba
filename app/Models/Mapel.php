@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Kelas extends Model
+class Mapel extends Model
 {
     use HasFactory;
+
+    protected $guarded = ['id'];
 
     protected static function boot()
     {
@@ -43,12 +44,12 @@ class Kelas extends Model
         }
     }
 
-    public function walikelas() {
-        return $this->belongsTo(User::class, 'walikelas_id', 'id');
+    public function guru() {
+        return $this->belongsTo(User::class);
     }
 
-    public function mapel() {
-        return $this->hasMany(Mapel::class);
+    public function kelas() {
+        return $this->belongsTo(Kelas::class);
     }
 
 }

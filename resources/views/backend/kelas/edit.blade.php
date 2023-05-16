@@ -1,5 +1,5 @@
 @extends('layouts.admin.app')
-@section('title', 'Tambah Data Kelas')
+@section('title', 'Ubah Data Kelas')
 @section('content')
     @php
         $url = Route::current()->getName();
@@ -28,51 +28,59 @@
                     <div class="card-body">
                         <form class="form form-vertical" method="post" action="">
                             @csrf
+                            <input type="hidden" id="walas" value="{{ old('nama', $classrooms->walikelas_id) }}">
                             <div class="form-body">
                                 <div class="row">
-                                    <div class="col-12">
+                                    <div class="col-12 col-md-4">
                                         <div class="form-group">
                                             <label for="nama">Nama Kelas</label>
                                             <input type="text" id="nama"
                                                 class="form-control @error('nama') is-invalid @enderror" name="nama"
-                                                placeholder="Masukkan Nama Kelas" value="{{ old('nama') }}" autofocus
+                                                placeholder="Masukkan Nama Kelas" value="{{ old('nama', $classrooms->nama) }}" autofocus
                                                 required>
                                         </div>
                                         @error('nama')
                                             {{ $message }}
                                         @enderror
                                     </div>
-                                    <div class="col-12 col-md-6">
+                                    <div class="col-12 col-md-4">
+                                        <div class="form-group">
+                                            <label for="first-name-vertical">Nama Ketua Murid</label>
+                                            <input type="text" id="first-name-vertical" class="form-control"
+                                                name="km" placeholder="Masukkan" value="{{ old('km', $classrooms->km) }}" autofocus>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                        <div class="form-group">
+                                            <label for="first-name-vertical">Nomor Telepon ketua Murid</label>
+                                            <input type="text" id="first-name-vertical" class="form-control"
+                                                name="telp_km" placeholder="Masukkan" value="{{ old('telp_km', $classrooms->telp_km) }}" autofocus>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-4">
                                         <div class="form-group">
                                             <label for="unit">Unit</label>
                                             <select class="form-control" name="unit" id="unit" required>
-                                                <option value="">Pilih Unit...</option>
+                                                <option value="{{ $classrooms->unit }}">{{ $classrooms->unit }}</option>
                                                 <option value="SD Bakti Nusantara 666">SD Bakti Nusantara 666</option>
                                                 <option value="SMP Bakti Nusantara 666">SMP Bakti Nusantara 666</option>
                                                 <option value="SMK Bakti Nusantara 666">SMK Bakti Nusantara 666</option>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-md-6">
+                                    <div class="col-12 col-md-4">
+                                        <div class="form-group">
+                                            <label for="first-name-vertical">Jurusan</label>
+                                            <input type="text" id="first-name-vertical" class="form-control"
+                                                name="jurusan" placeholder="Masukkan" value="{{ old('jurusan', $classrooms->jurusan) }}" autofocus>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-4">
                                         <div class="form-group">
                                             <label for="first-name-vertical">Wali Kelas</label>
-                                            <select class="form-control">
-                                                <option value="">{{ 'Pilih Wali Kelas...' }}</option>
+                                            <select class="form-control" id="wakelUpdate" name="walikelas_id">
+                                                <option value="{{ $classrooms->walikelas_id }}">{{ $classrooms->walikelas->name }}</option>
                                             </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group">
-                                            <label for="first-name-vertical">Nama Ketua Murid</label>
-                                            <input type="text" id="first-name-vertical" class="form-control"
-                                                name="diskon" placeholder="Masukkan" value="{{ old('diskon') }}" autofocus>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group">
-                                            <label for="first-name-vertical">Nomor Telepon ketua Murid</label>
-                                            <input type="text" id="first-name-vertical" class="form-control"
-                                                name="diskon" placeholder="Masukkan" value="{{ old('diskon') }}" autofocus>
                                         </div>
                                     </div>
                                     <div class="col-12">
@@ -100,14 +108,19 @@
             $(function() {
                 $('#unit').on('change', function() {
                     let unit = $('#unit').val();
-                    console.log(unit);
+                    let walas = $('#walas').val();
+                    // console.log(unit);
+                    // console.log(walas);
                     $.ajax({
                         type: "POST",
-                        url: "{{ route('getunit') }}",
-                        data: {unit: unit},
+                        url: "{{ route('getwakelupdate') }}",
+                        data: {
+                            unit: unit,
+                            walas: walas
+                        },
                         cache: false,
                         success: function(msg) {
-                            $('#unit').html(msg);
+                            $('#wakelUpdate').html(msg);
                         },
                         error: function(data) {
                             console.log('error:', data);

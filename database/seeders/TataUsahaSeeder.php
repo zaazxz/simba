@@ -19,8 +19,8 @@ class TataUsahaSeeder extends Seeder
         DB::table('users')->insert([
             [
                 'code'              => Str::random(7),
-                'name'              => 'Achyara Narasya Marlanda',
-                'email'             => 'achyaraa@gmail.com',
+                'name'              => 'Tata Usaha',
+                'email'             => 'tatausaha@gmail.com',
                 'uid'               => '1',
                 'role'              => 'Tata Usaha',
                 'unit'              => 'SMP Bakti Nusantara 666',

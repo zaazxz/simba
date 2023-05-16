@@ -140,6 +140,14 @@
                             </li>
                             <li class="list-group-item">
                                 <div class="row">
+                                    <div class="col-5">Jurusan</div>
+                                    <div class="col-7 font-weight-bold">:
+                                        {{ $kelas->jurusan ?? '-' }}
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
                                     <div class="col-5">Wali Kelas</div>
                                     <div class="col-7 font-weight-bold">:
                                         {{ $kelas->walikelas->name ?? '-' }}
