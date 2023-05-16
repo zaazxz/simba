@@ -26,8 +26,9 @@
 
                 <div class="card">
                     <div class="card-body">
-                        <form class="form form-vertical" method="post" action="">
+                        <form class="form form-vertical" method="GET" action="{{ $route }}">
                             @csrf
+                            {{-- @method($method) --}}
                             <input type="hidden" id="walas" value="{{ old('nama', $classrooms->walikelas_id) }}">
                             <div class="form-body">
                                 <div class="row">
