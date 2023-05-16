@@ -1,5 +1,5 @@
 @extends('layouts.admin.app')
-@section('title','Tambah Baru Data Mata Pelajaran')
+@section('title','Tambah Mapel')
 @section ('content')
 @php
 $url = Route::current()->getName();
@@ -31,26 +31,73 @@ $url = Route::current()->getName();
                         @method($method)
                         <div class="form-body">
                             <div class="row">
-                                <div class="col-4">
+                                <div class="col-12 col-md-6">
                                     <div class="form-group">
-                                        <label for="first-name-vertical">Kode Mata Pelajaran</label>
-                                        <input type="number" id="first-name-vertical" class="form-control" name="nama"
-                                            placeholder="Masukkan" value="{{ old('nama') }}" required>
+                                        <label for="kode">Kode Mata Pelajaran</label>
+                                        <input
+                                            type="text"
+                                            id="kode"
+                                            class="form-control @error('code_mapel') is-invalid @enderror"
+                                            name="code_mapel"
+                                            placeholder="Masukkan Kode Mapel"
+                                            value="{{ old('code_mapel') }}"
+                                            required>
+                                            @error('code_mapel')
+                                                {{ $message }}
+                                            @enderror
                                     </div>
                                 </div>
-                                <div class="col-12">
+                                <div class="col-12 col-md-6">
                                     <div class="form-group">
-                                        <label for="first-name-vertical">Nama Mata Pelajaran</label>
-                                        <input type="text" id="first-name-vertical" class="form-control" name="diskon"
-                                            placeholder="Masukkan" value="{{ old('diskon') }}" autofocus>
+                                        <label for="nama">Nama Mata Pelajaran</label>
+                                        <input
+                                            type="text"
+                                            id="nama"
+                                            class="form-control @error('nama') is-invalid @enderror"
+                                            name="nama"
+                                            placeholder="Masukkan"
+                                            value="{{ old('nama') }}"
+                                            autofocus>
+                                            @error('nama')
+                                                {{ $message }}
+                                            @enderror
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="unit">Kelas</label>
+                                        <select
+                                        class="form-control @error('kelas') is-invalid @enderror"
+                                        name="kelas_id"
+                                        id="kelas"
+                                        required>
+                                            <option value="">Pilih kelas...</option>
+                                            @foreach ($kelas as $classrooms)
+                                                <option value="{{ $classrooms->id }}">{{ $classrooms->nama }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6">
+                                    <div class="form-group">
+                                        <label for="guru">Guru</label>
+                                        <select
+                                        class="form-control @error('guru') is-invalid @enderror"
+                                        name="guru_id"
+                                        id="guru"
+                                        required>
+                                            <option value="">Pilih Guru Mapel...</option>
+                                            @foreach ($guru as $teachers)
+                                                <option value="{{ $teachers->id }}">{{ $teachers->name }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="body">Keterangan</label>
-                                        <input id="body" type="hidden" name="body">
+                                        <input id="body" type="hidden" name="keterangan">
                                         <trix-editor input="body"></trix-editor>
-
                                     </div>
                                 </div>
                                 <div class="col-12">

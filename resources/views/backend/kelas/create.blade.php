@@ -30,22 +30,63 @@
                             @csrf
                             <div class="form-body">
                                 <div class="row">
-                                    <div class="col-12">
+                                    <div class="col-12 col-md-4">
                                         <div class="form-group">
                                             <label for="nama">Nama Kelas</label>
-                                            <input type="text" id="nama"
-                                                class="form-control @error('nama') is-invalid @enderror" name="nama"
-                                                placeholder="Masukkan Nama Kelas" value="{{ old('nama') }}" autofocus
-                                                required>
+                                            <input
+                                            type="text"
+                                            id="nama"
+                                            class="form-control @error('nama') is-invalid @enderror"
+                                            name="nama"
+                                            placeholder="Masukkan Nama Kelas"
+                                            value="{{ old('nama') }}"
+                                            autofocus
+                                            required>
                                         </div>
                                         @error('nama')
                                             {{ $message }}
                                         @enderror
                                     </div>
-                                    <div class="col-12 col-md-6">
+                                    <div class="col-12 col-md-4">
+                                        <div class="form-group">
+                                            <label for="first-name-vertical">Nama Ketua Murid</label>
+                                            <input
+                                            type="text"
+                                            id="first-name-vertical"
+                                            class="form-control @error('km') is-invalid @enderror"
+                                            name="km"
+                                            placeholder="Masukkan Nama Ketua Murid"
+                                            value="{{ old('km') }}"
+                                            autofocus>
+                                        </div>
+                                        @error('km')
+                                            {{ $message }}
+                                        @enderror
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                        <div class="form-group">
+                                            <label for="first-name-vertical">Nomor Telepon ketua Murid</label>
+                                            <input
+                                            type="text"
+                                            id="first-name-vertical"
+                                            class="form-control @error('telp_km') is-invalid @enderror"
+                                            name="telp_km"
+                                            placeholder="Masukkan No Telp Ketua Murid"
+                                            value="{{ old('telp_km') }}"
+                                            autofocus>
+                                        </div>
+                                        @error('telp_km')
+                                            {{ $message }}
+                                        @enderror
+                                    </div>
+                                    <div class="col-12 col-md-4">
                                         <div class="form-group">
                                             <label for="unit">Unit</label>
-                                            <select class="form-control" name="unit" id="unit" required>
+                                            <select
+                                            class="form-control @error('unit') is-invalid @enderror"
+                                            name="unit"
+                                            id="unit"
+                                            required>
                                                 <option value="">Pilih Unit...</option>
                                                 <option value="SD Bakti Nusantara 666">SD Bakti Nusantara 666</option>
                                                 <option value="SMP Bakti Nusantara 666">SMP Bakti Nusantara 666</option>
@@ -53,26 +94,32 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-md-6">
+                                    <div class="col-12 col-md-4">
+                                        <div class="form-group">
+                                            <label for="first-name-vertical">Jurusan</label>
+                                            <input
+                                            type="text"
+                                            id="first-name-vertical"
+                                            class="form-control @error('jurusan') is-invalid @enderror"
+                                            name="jurusan"
+                                            placeholder="Masukkan Jurusan"
+                                            value="{{ old('jurusan') }}"
+                                            autofocus>
+                                        </div>
+                                        @error('jurusan')
+                                            {{ $message }}
+                                        @enderror
+                                    </div>
+                                    <div class="col-12 col-md-4">
                                         <div class="form-group">
                                             <label for="first-name-vertical">Wali Kelas</label>
-                                            <select class="form-control" id="wakel" name="walikelas_id">
+                                            <select
+                                            class="form-control @error('walikelas_id') is-invalid @enderror"
+                                            id="wakel"
+                                            name="walikelas_id"
+                                            required>
                                                 <option value="">Pilih Guru...</option>
                                             </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group">
-                                            <label for="first-name-vertical">Nama Ketua Murid</label>
-                                            <input type="text" id="first-name-vertical" class="form-control"
-                                                name="km" placeholder="Masukkan" value="{{ old('diskon') }}" autofocus>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group">
-                                            <label for="first-name-vertical">Nomor Telepon ketua Murid</label>
-                                            <input type="text" id="first-name-vertical" class="form-control"
-                                                name="telp_km" placeholder="Masukkan" value="{{ old('diskon') }}" autofocus>
                                         </div>
                                     </div>
                                     <div class="col-12">

@@ -112,4 +112,8 @@ class User extends Authenticatable
     public function kelas() {
         return $this->hasOne(Kelas::class);
     }
+
+    public function mapel() {
+        return $this->hasMany(Mapel::class);
+    }
 }

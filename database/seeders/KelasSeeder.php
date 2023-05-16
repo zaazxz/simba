@@ -19,8 +19,9 @@ class KelasSeeder extends Seeder
             [
                 'code'          => Str::random(5),
                 'walikelas_id'  => '2',
+                'jurusan'       => NULL,
                 'nama'          => 'IX A',
-                'km'            => 'Achyara Narasya Marlanda',
+                'km'            => 'Ketua Murid',
                 'unit'          => 'SMP Bakti Nusantara 666',
                 'telp_km'       => '089681238317'
             ],
