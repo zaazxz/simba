@@ -11,6 +11,7 @@ class Mapel extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+    protected $connection = 'mysql';
 
     protected static function boot()
     {

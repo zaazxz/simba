@@ -11,6 +11,9 @@ class Kelas extends Model
 {
     use HasFactory;
 
+    protected $connection = 'mysql';
+    protected $guarded = ['id'];
+
     protected static function boot()
     {
         parent::boot();
