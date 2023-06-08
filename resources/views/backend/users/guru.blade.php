@@ -70,7 +70,7 @@ $url = Route::current()->getName();
                             {{-- <th> NUPTK </th> --}}
                             <th> Jabatan </th>
                             <th> No Telp </th>
-                            <th> Kelas </th>
+                            <th> Status </th>
                             {{-- <th> Status </th> --}}
                             <th> </th>
                             </tr>

@@ -3,7 +3,6 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Database\Seeders\UserSeeder;
-use Database\Seeders\AdminSeeder;
 use Database\Seeders\IndoRegionRegencySeeder;
 use Database\Seeders\IndoRegionVillageSeeder;
 use Database\Seeders\IndoRegionDistrictSeeder;
@@ -18,10 +17,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(AdminSeeder::class);
-        $this->call(UserSeeder::class);
-        $this->call(TataUsahaSeeder::class);
-        $this->call(KelasSeeder::class);
         $this->call(IndoRegionProvinceSeeder::class);
         $this->call(IndoRegionRegencySeeder::class);
         $this->call(IndoRegionDistrictSeeder::class);

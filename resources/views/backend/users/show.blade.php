@@ -118,36 +118,6 @@
                                             <input type="text" class="form-control" value="{{ ($teacher->kelurahan) ? $teacher->getKelurahan->name : 'Data Kosong'  }}" disabled>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <small class="text-muted">{{ $teacher->name }}</small>
-                                        </div>
-                                        <div class="col-md-4 col-6 px-1 py-0">
-                                            <div class="alert alert-primary rounded py-2 mx-0">
-                                                Guru
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 col-6 px-1 py-0">
-                                            <div class="alert alert-primary rounded py-2 mx-0">
-                                                Wali Kelas IX
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 col-6 px-1 py-0">
-                                            <div class="alert alert-primary rounded py-2 mx-0">
-                                                Matematika IX
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-6 px-1 py-0">
-                                            <div class="alert alert-primary rounded py-2 mx-0">
-                                                SMP Bakti Nusantara 666
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 col-6 px-1 py-0">
-                                            <div class="alert alert-primary rounded py-2 mx-0">
-                                                SMK Bakti Nusantara 666
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </form>
                         </div>

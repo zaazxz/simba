@@ -25,12 +25,12 @@
                 {{-- Data Master --}}
                 <li>
                 <li
-                    class="dropdown {{ str_contains($url, 'tatausaha') ||
+                    class="dropdown {{
+                    str_contains($url, 'tatausaha') ||
                     str_contains($url, 'guru') ||
                     str_contains($url, 'jadwal') ||
                     str_contains($url, 'mapel') ||
-                    str_contains($url, 'kelas') ||
-                    str_contains($url, 'statement4')
+                    str_contains($url, 'kelas')
                         ? 'show active'
                         : '' }}">
                     <a href="" class="nav-link has-dropdown" data-toggle="dropdown">

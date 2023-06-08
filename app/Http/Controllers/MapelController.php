@@ -2,111 +2,117 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\Kelas;
-use App\Models\Mapel;
+use App\Models\mapel;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 
 class MapelController extends Controller
 {
     public function index()
     {
-        $data=[
-            'title'                 => 'Mata Pelajaran',
-            'teks'                  => 'Daftar Mata Pelajaran yang diampu Guru',
-            'mapels'                => Mapel::all(),
-            'mapel_all'             => Mapel::count(),
-            'mapel_active'          => Mapel::where('status', '=', '1')->count(),
-            'mapel_nonactive'       => Mapel::where('status', '=', '0')->count(),
-        ];
-
-        return view('backend.mapel.index', $data);
+        return view('backend.mapel.index', [
+            'title'             => 'Daftar Mapel',
+            'mapels'            => Mapel::all(),
+            'mapel_all'         => Mapel::count(),
+            'mapel_aktif'       => Mapel::where('status', 1)->count(),
+            'mapel_nonaktif'    => Mapel::where('status', 0)->count(),
+        ]);
     }
+
+    public function aktif()
+    {
+        return view('backend.mapel.index', [
+            'title'             => 'Daftar Mapel Aktif',
+            'mapels'            => Mapel::where('status', 1)->get(),
+            'mapel_all'         => Mapel::count(),
+            'mapel_aktif'       => Mapel::where('status', 1)->count(),
+            'mapel_nonaktif'    => Mapel::where('status', 0)->count(),
+        ]);
+    }
+
+    public function nonaktif()
+    {
+        return view('backend.mapel.index', [
+            'title'             => 'Daftar Mapel Nonaktif',
+            'mapels'            => Mapel::where('status', 0)->get(),
+            'mapel_all'         => Mapel::count(),
+            'mapel_aktif'       => Mapel::where('status', 1)->count(),
+            'mapel_nonaktif'    => Mapel::where('status', 0)->count(),
+        ]);
+    }
+
     public function create()
     {
-
-        $data=[
-            'title'     =>'BUAT MATA PELAJARAN BARU',
-            'teks'      =>'Dihalaman ini anda dapat menambahkan mata pelajaran',
-            'method'    =>'POST',
-            'guru'      => User::where('role', 'guru')->where('status', 1)->get(),
-            'kelas'     => Kelas::where('status', 1)->get(),
-            'route'     => route('mapel.store'),
-        ];
-
-        return view('backend.mapel.create', $data);
+        return view('backend.mapel.create', [
+            'method'            => 'POST',
+            'route'             => route('mapel.store'),
+        ]);
     }
 
     public function store(Request $request)
     {
         $data = $request->validate([
-            'code'          => Str::random(10),
-            'code_mapel'    => 'required',
-            'nama'          => 'required',
-            'guru_id'       => 'required',
-            'kelas_id'      => 'required',
-            'keterangan'    => '',
-            'status'        => ''
+            'kode'              => 'required|unique:tb_mapel,kode|max:2',
+            'mapel'             => 'required',
+            'beban'             => 'required',
+            'remember_token'    => Str::random(10)
         ]);
 
         Mapel::create($data);
 
         if ($data) {
-        return redirect()->route('mapel.index')->with('message', 'Mata Pelajaran baru berhasil dibuat');
+            return redirect()->route('mapel.index')->with('message', 'Input Data Mapel berhasil ditambahkan');
         } else {
-            return redirect()->route('mapel.index')->with('message', 'Mata Pelajaran baru gagal dibuat');
+            return redirect()->route('mapel.index')->with('message', 'Input Data Mapel gagal ditambahkan');
         }
-
     }
 
-    public function edit($code)
+    public function edit($id)
     {
-        $data=[
-            'title'     =>'EDIT PELAJARAN BARU',
-            'teks'      =>'Dihalaman ini anda dapat mengubah mata pelajaran',
-            'method'    =>'POST',
-            'mapels'    => Mapel::where('code', $code)->first(),
-            'guru'      => User::where('role', 'guru')->where('status', 1)->get(),
-            'kelas'     => Kelas::where('status', 1)->get(),
-            'route'     => route('mapel.update', $code),
-        ];
-        return view('backend.mapel.edit', $data);
+        return view('backend.mapel.edit', [
+            'title'     => 'Update Data Mapel',
+            'route'     => route('mapel.update', $id),
+            'method'    => 'PUT',
+            'mapel'     => Mapel::where('id', $id)->first(),
+        ]);
     }
 
-    public function update(Request $request, $code)
+    public function update(Request $request, $id)
     {
-        $edit = Mapel::where('code', $code)->first();
-        $edit->code         = $request->code;
-        $edit->code_mapel   = $request->code_mapel;
-        $edit->nama         = $request->nama;
-        $edit->kelas_id     = $request->kelas_id;
-        $edit->guru_id      = $request->guru_id;
-        $edit->keterangan   = $request->keterangan;
-        $edit->save();
+        $data = $request->validate([
+            'kode'              => 'required',
+            'mapel'             => 'required',
+            'beban'             => 'required',
+            'remember_token'    => Str::random(10)
+        ]);
 
-        if ($edit) {
-            return redirect()->route('mapel.index')->with('message', 'Mapel berhasil diupdate');
+        Mapel::where('id', $id)
+            ->update($data);
+
+        if ($data) {
+            return redirect()->route('mapel.index')->with('message', 'Input Data Mapel berhasil ditambahkan');
         } else {
-            return redirect()->route('mapel.index')->with('message', 'Mapel gagal diupdate');
+            return redirect()->route('mapel.index')->with('message', 'Input Data Mapel gagal ditambahkan');
         }
-
     }
 
-    public function status($code)
+    public function destroy($id)
     {
-        $mapel = Mapel::where('code', $code)->first();
+        $mapel = Mapel::where('id', $id);
+        $mapel->delete();
+        if ($mapel) {
+            return redirect()->route('mapel.index')->with('message', 'Data Mapel berhasil dihapus');
+        } else {
+            return redirect()->route('mapel.index')->with('message', 'Data Mapel gagal dihapus');
+        }
+    }
+
+    public function status($id)
+    {
+        $mapel = Mapel::where('id', $id)->first();
         $mapel->status = $mapel->status == '0' ? '1' : $mapel->status = '0';
         $mapel->save();
         return redirect()->route('mapel.index')->withSuccess('Status berhasil diubah');
-    }
-
-    public function destroy($code)
-    {
-        $mapel = Mapel::where('code', $code);
-        $mapel->delete();
-        return back()->with('message', 'Mata Pelajaran berhasil dihapus');
     }
 }

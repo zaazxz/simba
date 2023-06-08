@@ -30,8 +30,6 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::post('/getkabupaten', [UserController::class, 'kabkota'])->name('getkabupaten');
 Route::post('/getkecamatan', [UserController::class, 'kecamatan'])->name('getkecamatan');
 Route::post('/getkelurahan', [UserController::class, 'kelurahan'])->name('getkelurahan');
-Route::post('/getunit', [KelasController::class, 'wakel'])->name('getwakel');
-Route::post('/getunitupdate', [KelasController::class, 'wakelUpdate'])->name('getwakelupdate');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::prefix('gtk')->group(function () {
@@ -68,28 +66,32 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/import', [JadwalController::class, 'import'])->name('jadwal.import');
     });
 
-    Route::prefix('kelas')->group(function() {
+    Route::prefix('kelas')->group(function()  {
         Route::get('/', [KelasController::class, 'index'])->name('kelas.index');
         Route::get('/create', [KelasController::class, 'create'])->name('kelas.create');
-        Route::post('/store', [KelasController::class, 'store'])->name('kelas.store');
+        Route::get('/nonaktif', [KelasController::class, 'nonaktif'])->name('kelas.non');
         Route::get('/aktif', [KelasController::class, 'aktif'])->name('kelas.aktif');
-        Route::get('/pending', [KelasController::class, 'pending'])->name('kelas.pending');
-        Route::get('/edit/{code}', [KelasController::class, 'edit'])->name('kelas.edit');
-        Route::get('/update{code}', [KelasController::class, 'update'])->name('kelas.update');
-        Route::get('/destroy{code}', [KelasController::class, 'destroy'])->name('kelas.destroy');
-        Route::get('/status/{code}', [KelasController::class, 'status'])->name('kelas.status');
+        Route::get('/edit/{id}', [KelasController::class, 'edit'])->name('kelas.edit');
+        Route::put('/update/{id}', [KelasController::class, 'update'])->name('kelas.update');
+        Route::get('/delete/{id}', [KelasController::class, 'destroy'])->name('kelas.destroy');
+        Route::get('/status/{id}', [KelasController::class, 'status'])->name('kelas.status');
+        Route::post('/store', [KelasController::class, 'store'])->name('kelas.store');
     });
 
-    Route::prefix('mapel')->group(function() {
+    Route::prefix('mapel')->group(function()  {
         Route::get('/', [MapelController::class, 'index'])->name('mapel.index');
         Route::get('/create', [MapelController::class, 'create'])->name('mapel.create');
-        Route::post('/store', [MapelController::class, 'store'])->name('mapel.store');
+        Route::get('/nonaktif', [MapelController::class, 'nonaktif'])->name('mapel.non');
         Route::get('/aktif', [MapelController::class, 'aktif'])->name('mapel.aktif');
-        Route::get('/pending', [MapelController::class, 'pending'])->name('mapel.pending');
-        Route::get('/edit/{code}', [MapelController::class, 'edit'])->name('mapel.edit');
-        Route::get('/update{code}', [MapelController::class, 'update'])->name('mapel.update');
-        Route::get('/destroy{code}', [MapelController::class, 'destroy'])->name('mapel.destroy');
-        Route::get('/status/{code}', [MapelController::class, 'status'])->name('mapel.status');
+        Route::get('/edit/{id}', [MapelController::class, 'edit'])->name('mapel.edit');
+        Route::put('/update/{id}', [MapelController::class, 'update'])->name('mapel.update');
+        Route::get('/delete/{id}', [MapelController::class, 'destroy'])->name('mapel.destroy');
+        Route::get('/status/{id}', [MapelController::class, 'status'])->name('mapel.status');
+        Route::post('/store', [MapelController::class, 'store'])->name('mapel.store');
+    });
+
+    Route::prefix('presensi')->group(function() {
+        Route::get('/kehadiran');
     });
 
 });

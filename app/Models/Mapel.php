@@ -2,39 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Str;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Mapel extends Model
 {
     use HasFactory;
 
+    protected $table = 'tb_mapel';
     protected $guarded = ['id'];
-    protected $connection = 'mysql';
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($model) {
-            $model->code = $model->generateUUID();
-        });
-        static::updating(function ($model) {
-            $model->code = $model->generateUUID();
-        });
-    }
-
-    public function generateUUID()
-    {
-        $uuid = (string) Str::uuid();
-
-        if (self::where('code', $uuid)->exists()) {
-            return $this->generateUUID();
-        }
-
-        return $uuid;
-    }
+    protected $primaryKey = 'id';
 
     public function getStatusTextAttribute()
     {
@@ -45,12 +22,6 @@ class Mapel extends Model
         }
     }
 
-    public function guru() {
-        return $this->belongsTo(User::class);
-    }
 
-    public function kelas() {
-        return $this->belongsTo(Kelas::class);
-    }
 
 }
