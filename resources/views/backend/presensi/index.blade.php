@@ -27,7 +27,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link {{ str_contains($url, 'tidakhadir') ? 'active' : '' }}"
                                         href="/">Tidak Hadir <span
-                                            class="{{ str_contains($url, 'today') ? 'badge badge-white' : 'badge badge-primary' }}">0</span></a>
+                                            class="{{ str_contains($url, 'today') ? 'badge badge-white' : 'badge badge-primary' }}">{{ $tdkhadir_count }}</span></a>
                                 </li>
                             </ul>
                         </div>

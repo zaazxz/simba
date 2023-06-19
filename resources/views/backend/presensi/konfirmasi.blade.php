@@ -97,19 +97,27 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form class="form form-vertical" method="post" action="#">
+                        <form class="form form-vertical" method="post" action="{{ route('presensi.store') }}">
                             @csrf
-                            {{-- @method($method) --}}
+                            @method('post')
+
+                            {{-- Hidden Input --}}
+                            <input type="hidden" value="{{ old('uid', $konfirmasi->UID) }}" name="uid">
+                            <input type="hidden" value="{{ old('hari', $konfirmasi->hari) }}" name="hari">
+                            <input type="hidden" value="{{ old('bulan', $konfirmasi->bulan) }}" name="bulan">
+                            <input type="hidden" value="{{ old('tahun', $konfirmasi->tahun) }}" name="tahun">
+                            <input type="hidden" value="{{ old('unit', $konfirmasi->unit) }}" name="unit">
+
                             <div class="form-body">
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label for="kelas">Nama Guru</label>
-                                            <input type="text" id="keterangan"
-                                                class="form-control @error('keterangan') is-invalid @enderror"
-                                                name="keterangan" placeholder="Masukkan Nama keterangan"
-                                                value="{{ old('keterangan', $konfirmasi->nama_lengkap) }}" disabled>
-                                            @error('keterangan')
+                                            <label for="nama">Nama Guru</label>
+                                            <input type="text" id="nama"
+                                                class="form-control @error('nama') is-invalid @enderror"
+                                                name="nama" placeholder="Masukkan Nama"
+                                                value="{{ old('nama', $konfirmasi->nama_lengkap) }}">
+                                            @error('nama')
                                                 {{ $message }}
                                             @enderror
                                         </div>

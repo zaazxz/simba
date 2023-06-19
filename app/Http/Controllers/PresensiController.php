@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Hadir;
 use App\Models\Konfirmasi;
+use App\Models\TidakHadir;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class PresensiController extends Controller
 {
@@ -13,51 +16,72 @@ class PresensiController extends Controller
     public function hadir()
     {
         return view('backend.presensi.index', [
-            'title'         => 'Data Hadir Hari Ini',
+            'title'             => 'Data Hadir Hari Ini',
+            'hadir_count'       => Hadir::count(),
+            'tdkhadir_count'    => TidakHadir::where('tgl', Carbon::today())->count(),
+            'hadirs'            => Hadir::all()
+        ]);
+    }
+
+    // Konfirmasi Hari Ini
+    public function konfirmasi()
+    {
+
+        $hadir = Hadir::where('uid', '!=', 'NULL')->select('uid')->get()->toArray();
+        $tdkhadir = TidakHadir::where('uid', '!=', 'NULL')->select('uid')->get()->toArray();
+
+        return view('backend.presensi.konfirmasi', [
+            'title'         => 'Konfirmasi',
+            'confirm'       => Konfirmasi::wherenotin('uid', $hadir)->wherenotin('uid', $tdkhadir)->get(),
+        ]);
+    }
+
+    // Tidak Hadir Hari Ini
+    public function tdkhadir()
+    {
+
+        return view('backend.presensi.index', [
+            'title'         => 'Data Tidak Hadir Hari Ini',
             'hadir_count'   => Hadir::count(),
             'hadirs'        => Hadir::all()
         ]);
     }
 
-        // Konfirmasi Hari Ini
-        public function konfirmasi()
-        {
-
-            $hadir = Hadir::where('uid', '!=', 'NULL')->select('uid')->get()->toArray();
-
-            return view('backend.presensi.konfirmasi', [
-                'title'         => 'Konfirmasi',
-                'confirm'       => Konfirmasi::wherenotin('uid', $hadir)->get(),
-            ]);
-        }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    // Presensi Tidak Hadir
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'uid'           => 'required',
+            'nama'          => 'required',
+            'hari'          => 'required',
+            'bulan'         => 'required',
+            'status'        => 'required',
+            'tahun'         => 'required',
+            'unit'          => 'required',
+            'keterangan'    => '',
+        ]);
+
+        TidakHadir::create([
+            'uid'           => $request->uid,
+            'nama'          => $request->nama,
+            'hari'          => $request->hari,
+            'unit'          => $request->unit,
+            'bulan'         => $request->bulan,
+            'status'        => $request->status,
+            'tahun'         => $request->tahun,
+            'keterangan'    => $request->keterangan,
+            'tgl'           => Carbon::today(),
+            'update_oleh'   => Auth::user()->name,
+            'waktu_update'  => Carbon::now()
+        ]);
+
+        if ($data) {
+            return redirect()->route('presensi.konfirmasi')->with('message', 'Ubah Data Kehadiran Berhasil');
+        } else {
+            return redirect()->route('presensi.konfirmasi')->with('message', 'Ubah Data Kehadiran Gagal');
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //

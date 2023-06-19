@@ -100,6 +100,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         // Konfirmasi
         Route::get('/konfirmasi', [PresensiController::class, 'konfirmasi'])->name('presensi.konfirmasi');
+        Route::post('/konfirmasi/store', [PresensiController::class, 'store'])->name('presensi.store');
 
     });
 

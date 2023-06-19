@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class TidakHadir extends Model
 {
     use HasFactory;
+
+    protected $table = 'logtidakhadir';
+    protected $guarded = ['id'];
+
 }
