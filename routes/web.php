@@ -6,7 +6,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\KehadiranController;
 use App\Http\Controllers\KelasController;
+use App\Http\Controllers\KonfirmasiController;
+use App\Http\Controllers\PresensiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,7 +94,13 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::prefix('presensi')->group(function() {
-        Route::get('/kehadiran');
+
+        // Hadir
+        Route::get('/hadir', [PresensiController::class, 'hadir'])->name('presensi.hadir');
+
+        // Konfirmasi
+        Route::get('/konfirmasi', [PresensiController::class, 'konfirmasi'])->name('presensi.konfirmasi');
+
     });
 
 });

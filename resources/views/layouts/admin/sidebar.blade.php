@@ -69,11 +69,11 @@
                             <i class="fa-solid fa-person-chalkboard"></i> <span>Presensi</span>
                         </a>
                         <ul class="dropdown-menu" style="display: none;">
-                            <li class="{{ str_contains($url, 'kehadiran') ? 'active' : '' }}">
-                                <a class="nav-link" href="">Kehadiran</a>
+                            <li class="{{ str_contains($url, 'hadir') ? 'active' : '' }}">
+                                <a class="nav-link" href="{{ route('presensi.hadir') }}">Kehadiran</a>
                             </li>
                             <li class="{{ str_contains($url, 'konfirmasi') ? 'active' : '' }}">
-                                <a class="nav-link" href="">Konfirmasi</a>
+                                <a class="nav-link" href="{{ route('presensi.konfirmasi') }}">Konfirmasi</a>
                             </li>
                         </ul>
                     </li>
