@@ -6,9 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\JadwalController;
-use App\Http\Controllers\KehadiranController;
 use App\Http\Controllers\KelasController;
-use App\Http\Controllers\KonfirmasiController;
+use App\Http\Controllers\PesanController;
 use App\Http\Controllers\PresensiController;
 
 /*
@@ -109,7 +108,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     });
 
-    Route::get('/inbox');
-    Route::get();
+    Route::get('/inbox', [PesanController::class, 'inbox'])->name('pesan.inbox');
+    Route::get('/outbox', [PesanController::class, 'outbox'])->name('pesan.outbox');
 
 });
