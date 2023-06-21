@@ -7,7 +7,7 @@
 
         {{-- Logo --}}
         <div class="sidebar-brand">
-            <a href="/" target="_blank">
+            <a href="/">
                 <img width="75" src="{{ asset('backend/img/logo/baknus.png') }}" alt="IPA"
                     style="margin-top: 10px">
             </a>
@@ -110,10 +110,10 @@
                         </a>
                         <ul class="dropdown-menu" style="display: none;">
                             <li class="{{ str_contains($url, 'whatsapp') ? 'active' : '' }}">
-                                <a class="nav-link" href="">Whatsapp Gateway</a>
+                                <a class="nav-link" href="{{ route('pengaturan.whatsapp.index') }}">Whatsapp Gateway</a>
                             </li>
                             <li class="{{ str_contains($url, 'mesin') ? 'active' : '' }}">
-                                <a class="nav-link" href="">Mesin Fingerprint</a>
+                                <a class="nav-link" href="{{ route('pengaturan.mesin.index') }}">Mesin Fingerprint</a>
                             </li>
                             <li class="{{ str_contains($url, 'user') ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ route('pengaturan.user.index') }}">Pengguna</a>

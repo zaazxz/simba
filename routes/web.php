@@ -8,8 +8,10 @@ use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MapelController;
 use App\Http\Controllers\PesanController;
 use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\MesinController;
 use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\PengaturanController;
+use App\Http\Controllers\WhatsappController;
 
 /*
 |--------------------------------------------------------------------------
@@ -122,6 +124,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/user/delete/{code}', [PengaturanController::class, 'destroy'])->name('pengaturan.user.destroy');
         Route::put('/user/update/{code}', [PengaturanController::class, 'update'])->name('pengaturan.user.update');
         Route::get('/user/status/{code}', [PengaturanController::class, 'status'])->name('pengaturan.user.status');
+
+        // Whatsapp Gateaway
+        Route::get('/whatsapp', [WhatsappController::class, 'index'])->name('pengaturan.whatsapp.index');
+
+        // Mesin Fingerprint
+        Route::get('/mesin', [MesinController::class, 'index'])->name('pengaturan.mesin.index');
 
     });
 
