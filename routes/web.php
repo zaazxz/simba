@@ -100,11 +100,16 @@ Route::group(['middleware' => 'auth'], function () {
 
         // Tidak Hadir
         Route::get('/tidak', [PresensiController::class, 'tidak'])->name('presensi.tidak');
+        Route::post('/tidak/update/{id}', [PresensiController::class, 'update'])->name('presensi.update');
+        Route::get('/tidak/destroy/{id}', [PresensiController::class, 'destroy'])->name('presensi.destroy');
 
         // Konfirmasi
         Route::get('/konfirmasi', [PresensiController::class, 'konfirmasi'])->name('presensi.konfirmasi');
         Route::post('/konfirmasi/store', [PresensiController::class, 'store'])->name('presensi.store');
 
     });
+
+    Route::get('/inbox');
+    Route::get();
 
 });

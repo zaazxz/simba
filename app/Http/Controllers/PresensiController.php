@@ -84,42 +84,27 @@ class PresensiController extends Controller
         }
     }
 
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->validate([
+            'status'        => '',
+            'keterangan'    => '',
+        ]);
+
+        TidakHadir::where('id', $id)
+            ->update($data);
+
+        if ($data) {
+            return redirect()->route('presensi.tidak')->with('message', 'Ubah Data Kehadiran Berhasil');
+        } else {
+            return redirect()->route('presensi.tidak')->with('message', 'Ubah Data Kehadiran Gagal');
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $konfirmasi = TidakHadir::where('id', $id);
+        $konfirmasi->delete();
+        return back()->with('message', 'Data presensi berhasil dihapus');
     }
 }
