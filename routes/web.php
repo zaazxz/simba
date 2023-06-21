@@ -1,14 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\MapelController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\KelasController;
+use App\Http\Controllers\MapelController;
 use App\Http\Controllers\PesanController;
+use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\PresensiController;
+use App\Http\Controllers\PengaturanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -105,6 +106,22 @@ Route::group(['middleware' => 'auth'], function () {
         // Konfirmasi
         Route::get('/konfirmasi', [PresensiController::class, 'konfirmasi'])->name('presensi.konfirmasi');
         Route::post('/konfirmasi/store', [PresensiController::class, 'store'])->name('presensi.store');
+
+    });
+
+    Route::prefix('pengaturan')->group(function() {
+
+        // User
+        Route::get('/user', [PengaturanController::class, 'user'])->name('pengaturan.user.index');
+        Route::get('/user/aktif', [PengaturanController::class, 'aktif'])->name('pengaturan.user.aktif');
+        Route::get('/user/non', [PengaturanController::class, 'non'])->name('pengaturan.user.non');
+        Route::get('/user/create', [PengaturanController::class, 'create'])->name('pengaturan.user.create');
+        Route::post('/user/store', [PengaturanController::class, 'store'])->name('pengaturan.user.store');
+        Route::get('/user/show/{code}', [PengaturanController::class, 'show'])->name('pengaturan.user.show');
+        Route::get('/user/edit/{code}', [PengaturanController::class, 'edit'])->name('pengaturan.user.edit');
+        Route::get('/user/delete/{code}', [PengaturanController::class, 'destroy'])->name('pengaturan.user.destroy');
+        Route::put('/user/update/{code}', [PengaturanController::class, 'update'])->name('pengaturan.user.update');
+        Route::get('/user/status/{code}', [PengaturanController::class, 'status'])->name('pengaturan.user.status');
 
     });
 

@@ -9,10 +9,11 @@
     <ul class="navbar-nav navbar-right">
         <li class="dropdown"><a href="#" data-toggle="dropdown"
                 class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                <img alt="image"
-                    src="../../images/users/{{ is_null(Auth::user()->photo) ? 'avatar-1.png' : Auth::user()->photo }}"
-                    class="rounded-circle mr-1">
-                {{-- <img class="mr-3 rounded-circle" width="50" src="../{{ (is_null($td->member->photo)) ? 'assets/admin/img/avatar/avatar-1.png' : ($td->member->photo) }}" alt="avatar"> --}}
+                @if (Auth::user()->photo)
+                    <img src="{{ asset('images/users/' . Auth::user()->photo ) }}" alt="image" class="rounded-circle mr-1">
+                @else
+                    <img src="{{ asset('images/users/avatar-1.png') }}" alt="image" class="rounded-circle mr-1">
+                @endif
                 <div class="d-sm-none d-lg-inline-block">Hi, {{ Auth::user()->name }}</div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">

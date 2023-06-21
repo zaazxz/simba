@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Inbox extends Model
 {
     use HasFactory;
-    protected $table = "inbox";
+    protected $table = "pesanmasuk";
 }
