@@ -98,7 +98,7 @@ $url = Route::current()->getName();
                                         <i class="fa fa-trash"></i>
                                     </a>
                                     <a class="btn btn btn-primary btn-flat my-1" data-toggle="tooltip" title='Detail'  href="{{ route('guru.show', $guru->code ?? 'test') }}">
-                                        z
+                                        <i class="fa fa-info"></i>
                                     </a>
                                 </td>
                             </tr>
