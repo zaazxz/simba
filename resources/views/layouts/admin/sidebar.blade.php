@@ -90,10 +90,10 @@
                         </a>
                         <ul class="dropdown-menu" style="display: none;">
                             <li class="{{ str_contains($url, 'inbox') ? 'active' : '' }}">
-                                <a class="nav-link" href="">Inbox</a>
+                                <a class="nav-link" href="{{ route('pesan.inbox') }}">Inbox</a>
                             </li>
                             <li class="{{ str_contains($url, 'outbox') ? 'active' : '' }}">
-                                <a class="nav-link" href="">Outbox</a>
+                                <a class="nav-link" href="{{ route('pesan.outbox') }}">Outbox</a>
                             </li>
                         </ul>
                     </li>
