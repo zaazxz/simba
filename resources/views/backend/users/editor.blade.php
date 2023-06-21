@@ -104,7 +104,7 @@ $url = Route::current()->getName();
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="form-group col-md-5 col-12">
+                                    <div class="form-group col-md-6 col-12">
                                         <label>Unit Induk</label>
                                         <select name="unit" id="unit" class="form-control">
                                             <option value="{{ str_contains($url, 'edit') ? $teacher->unit : $teacher->unit }}">{{ $teacher->unit }}</option>
@@ -114,14 +114,16 @@ $url = Route::current()->getName();
                                             <option>YPDM Bakti Nusantara 666</option>
                                         </select>
                                     </div>
-                                    <div class="form-group col-md-7 col-12">
-                                        <label>Unit Lainnya</label>
-                                        <input type="text" class="form-control" value="{{ str_contains($url, 'edit') ? $teacher->unit2 : '' }}" required name="unit2">
-                                        <div class="invalid-feedback">
-                                            Silahkan nama instansi/sekolah jika mengajar di selain Sekolah Induk
-                                        </div>
+                                    <div class="form-group col-md-6 col-12">
+                                        <label>Unit Induk</label>
+                                        <select id="unit2" class="form-control" name="unit2">
+                                            <option value="{{ str_contains($url, 'edit') ? $teacher->unit2 : '' }}">{{ $teacher->unit2 }}</option>
+                                            <option>SD Bakti Nusantara 666</option>
+                                            <option>SMP Bakti Nusantara 666</option>
+                                            <option>SMK Bakti Nusantara 666</option>
+                                            <option>YPDM Bakti Nusantara 666</option>
+                                        </select>
                                     </div>
-
                                 </div>
 
                                 <div class="row">
@@ -194,7 +196,7 @@ $url = Route::current()->getName();
                                         <select name="provinsi" id="provinsi" class="form-control" required>
                                             <option value="">Pilih provinsi...</option>
                                             @foreach ($provinces as $provinsi)
-                                            <option value="{{ str_contains($url, 'edit') ? $provinsi->code : '' }}" {{ old('provinsi', $teacher->provinsi??'')==$provinsi->code?'selected':'' }}>{{ $provinsi->name }}</option>
+                                            <option value="{{ str_contains($url, 'edit') ? $provinsi->id : '' }}" {{ old('provinsi', $teacher->provinsi??'')==$provinsi->id?'selected':'' }}>{{ $provinsi->name }}</option>
                                             @endforeach
                                         </select>
                                         <div class="invalid-feedback">
@@ -204,7 +206,7 @@ $url = Route::current()->getName();
                                     <div class="form-group col-md-6 col-12">
                                         <label>Kab/Kota</label>
                                         <select name="kabkota" id="kabupaten" class="form-control">
-                                            <option value="{{ $teacher->kabkota }}">{{ is_null ($teacher->kabkota) ? 'Pilih Kelurahan' : $teacher->getKabkota->name }}</option>
+                                            <option value="{{ $teacher->kabkota??'' }}">{{ is_null ($teacher->kabkota) ? 'Pilih Kelurahan' : $teacher->getKabkota->name }}</option>
                                         </select>
                                         <div class="invalid-feedback">
                                             Silahkan Isi Kab/Kota
@@ -214,7 +216,7 @@ $url = Route::current()->getName();
                                     <div class="form-group col-md-6 col-12">
                                         <label>Kecamatan</label>
                                         <select name="kecamatan" id="kecamatan" class="form-control">
-                                            <option value="{{ $teacher->kecamatan }}">{{ is_null ($teacher->kecamatan) ? 'Pilih Kecamatan' : $teacher->getkecamatan->name }}</option>
+                                            <option value="{{ $teacher->kecamatan??'' }}">{{ is_null ($teacher->kecamatan) ? 'Pilih Kecamatan' : $teacher->getKecamatan->name }}</option>
                                         </select>
                                         <div class="invalid-feedback">
                                             Silahkan Isi Kecamatan
@@ -224,7 +226,7 @@ $url = Route::current()->getName();
                                     <div class="form-group col-md-6 col-12">
                                         <label>Kelurahan</label>
                                         <select name="kelurahan" id="kelurahan" class="form-control">
-                                            <option value="{{ $teacher->kelurahan }}">{{ is_null ($teacher->kelurahan) ? 'Pilih Kelurahan' : $teacher->getkelurahan->name }}</option>
+                                            <option value="{{ $teacher->kelurahan??'' }}">{{ is_null ($teacher->kelurahan) ? 'Pilih Kelurahan' : $teacher->getKelurahan->name }}</option>
                                         </select>
                                         <div class="invalid-feedback">
                                             Silahkan Isi kelurahan

@@ -24,9 +24,9 @@ class HomeController extends Controller
     {
         $info=[
             'guru'      => User::where('role', '!=', 'Admin')->count(),
-            'sd'      => User::where('unit', '=', 'SD Bakti Nusantara 666')->count(),
-            'smp'      => User::where('unit', '=', 'SMP Bakti Nusantara 666')->count(),
-            'smk'      => User::where('unit', '=', 'SMK Bakti Nusantara 666')->count(),
+            'sd'        => User::where('unit', '=', 'SD Bakti Nusantara 666')->count(),
+            'smp'       => User::where('unit', '=', 'SMP Bakti Nusantara 666')->count(),
+            'smk'       => User::where('unit', '=', 'SMK Bakti Nusantara 666')->count(),
         ];
         return view('backend.home', $info);
     }

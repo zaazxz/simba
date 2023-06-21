@@ -1,28 +1,36 @@
 <?php
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use App\Models\Kelas;
+use App\Models\Regency;
+use App\Models\Village;
+use App\Models\District;
+use App\Models\Province;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+
+    protected $connection = 'mysql';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'code'
-    ];
+    // protected $fillable = [
+    //     'name',
+    //     'email',
+    //     'password',
+    //     'code'
+    // ];
+    protected $guarded = ['id'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -83,18 +91,31 @@ class User extends Authenticatable
         }
     }
 
+    public function getProvinsi()
+    {
+        return $this->belongsTo(Province::class, 'provinsi', 'id');
+    }
+
     public function getKabkota()
     {
-        return $this->belongsTo(indonesia_cities::class, 'kabkota', 'code');
+        return $this->belongsTo(Regency::class, 'kabkota', 'id');
     }
 
     public function getKecamatan()
     {
-        return $this->belongsTo(indonesia_districts::class, 'kecamatan', 'code');
+        return $this->belongsTo(District::class, 'kecamatan', 'id');
     }
 
     public function getKelurahan()
     {
-        return $this->belongsTo(indonesia_villages::class, 'kelurahan', 'code');
+        return $this->belongsTo(Village::class, 'kelurahan', 'id');
+    }
+
+    public function kelas() {
+        return $this->hasOne(Kelas::class);
+    }
+
+    public function mapel() {
+        return $this->hasMany(Mapel::class);
     }
 }

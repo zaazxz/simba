@@ -1,5 +1,5 @@
 @extends('layouts.admin.app')
-@section('title','Data Guru')
+@section('title','Data Mapel')
 @section ('content')
 @php
 $url = Route::current()->getName();
@@ -9,12 +9,11 @@ $url = Route::current()->getName();
           <div class="section-header">
               <h1> {{ $title }}</h1>
               <div class="section-header-button">
-                  <a href="{{ route('guru.create') }}" class="btn btn-primary">Tambah Baru</a>
+                  <a href="{{ route('mapel.create') }}" class="btn btn-primary">Tambah Baru</a>
               </div>
             <div class="section-header-breadcrumb">
               <div class="breadcrumb-item active"><a href="{{ route('home') }}">Dashboard</a></div>
-              <div class="breadcrumb-item"><a href="{{ route('guru.index') }}">GTK</a></div>
-              <div class="breadcrumb-item">Guru</div>
+              <div class="breadcrumb-item">Mapel</div>
             </div>
           </div>
           <div class="row">
@@ -23,13 +22,13 @@ $url = Route::current()->getName();
                 <div class="card-body">
                     <ul class="nav nav-pills">
                       <li class="nav-item">
-                        <a class="nav-link {{ str_contains($url, 'index') ? 'active' : '' }}" href="{{ route('guru.index') }}">Semua <span class="{{ str_contains($url, 'index') ? 'badge badge-white' : 'badge badge-primary' }}">{{ $teachers_all }}</span></a>
+                        <a class="nav-link {{ str_contains($url, 'index') ? 'active' : '' }}" href="{{ route('mapel.index') }}">Semua <span class="{{ str_contains($url, 'index') ? 'badge badge-white' : 'badge badge-primary' }}">{{ $mapel_all }}</span></a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link {{ str_contains($url, 'aktif') ? 'active' : '' }}" href="{{ route('guru.aktif') }}">Aktif <span class="{{ str_contains($url, 'aktif') ? 'badge badge-white' : 'badge badge-primary' }}">{{ $teachers_ak }}</span></a>
+                        <a class="nav-link {{ str_contains($url, 'aktif') ? 'active' : '' }}" href="{{ route('mapel.aktif') }}">Aktif <span class="{{ str_contains($url, 'aktif') ? 'badge badge-white' : 'badge badge-primary' }}">{{ $mapel_aktif }}</span></a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link {{ str_contains($url, 'non') ? 'active' : '' }}" href="{{ route('guru.non') }}">Pending <span class="{{ str_contains($url, 'non') ? 'badge badge-white' : 'badge badge-primary' }}">{{ $teachers_pe }}</span></a>
+                        <a class="nav-link {{ str_contains($url, 'non') ? 'active' : '' }}" href="{{ route('mapel.non') }}">Pending <span class="{{ str_contains($url, 'non') ? 'badge badge-white' : 'badge badge-primary' }}">{{ $mapel_nonaktif }}</span></a>
                       </li>
                     </ul>
                   </div>
@@ -64,41 +63,30 @@ $url = Route::current()->getName();
                     <table id="table_id" class="display" style="width: 100%">
                         <thead>
                             <tr>
-                            <th>#</th>
-                            <th> Nama Lengkap </th>
-                            <th> Unit </th>
-                            {{-- <th> NUPTK </th> --}}
-                            <th> Jabatan </th>
-                            <th> No Telp </th>
-                            <th> Status </th>
-                            {{-- <th> Status </th> --}}
-                            <th> </th>
+                            <th> # </th>
+                            <th> Nama Mapel </th>
+                            <th> Kode Mapel </th>
+                            <th> Beban Mapel </th>
+                            <th> status </th>
+                            <th>  </th>
                             </tr>
                         </thead>
                         <tbody>
-                            @php $i = 0; @endphp
-                            @foreach ($teachers as $guru)
-                            @php $i++ @endphp
+                            @foreach ($mapels as $mapel)
                             <tr>
-                                <td>{{ $i }}</td>
-                                <td>{{ $guru->name }}</td>
-                                <td>{{ $guru->unit }}</td>
-                                {{-- <td>{{ $guru->nuptk }}</td> --}}
-                                <td>{{ $guru->role }}</td>
-                                <td>{{ $guru->notelp }}</td>
-                                {{-- <td>{{ $guru->kelas->nama ?? 'unknown' }}</td> --}}
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $mapel->mapel }}</td>
+                                <td>{{ $mapel->kode }}</td>
+                                <td>{{ $mapel->beban }}</td>
                                 <td>
-                                    <a href="{{ route('guru.status', ['code' => $guru->code]) }}">{!! $guru->status_text !!}
+                                    <a href="{{ route('mapel.status', ['id' => $mapel->id]) }}">{!! $mapel->status_text !!}
                                 </td>
                                 <td class="text-center">
-                                    <a class="btn btn btn-warning btn-flat my-1" data-toggle="tooltip" title='Edit' href="{{ route('guru.edit', $guru->code ?? 'test') }}">
+                                    <a class="btn btn btn-warning btn-flat my-1" data-toggle="tooltip" title='Edit' href="{{ route('mapel.edit', $mapel->id ?? 'test') }}">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
-                                    <a class="btn btn btn-danger btn-flat my-1" data-toggle="tooltip" title='Delete'  href="{{ route('guru.destroy', $guru->code ?? 'test') }}">
+                                    <a class="btn btn btn-danger btn-flat my-1" data-toggle="tooltip" title='Delete'  href="{{ route('mapel.destroy', $mapel->id ?? 'test') }}">
                                         <i class="fa fa-trash"></i>
-                                    </a>
-                                    <a class="btn btn btn-primary btn-flat my-1" data-toggle="tooltip" title='Detail'  href="{{ route('guru.show', $guru->code ?? 'test') }}">
-                                        <i class="fa fa-info"></i>
                                     </a>
                                 </td>
                             </tr>

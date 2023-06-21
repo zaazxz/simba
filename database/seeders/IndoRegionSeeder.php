@@ -1,14 +1,17 @@
 <?php
+
+/*
+ * This file is part of the IndoRegion package.
+ *
+ * (c) Azis Hapidin <azishapidin.com | azishapidin@gmail.com>
+ *
+ */
+
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Database\Seeders\UserSeeder;
-use Database\Seeders\IndoRegionRegencySeeder;
-use Database\Seeders\IndoRegionVillageSeeder;
-use Database\Seeders\IndoRegionDistrictSeeder;
-use Database\Seeders\IndoRegionProvinceSeeder;
 
-class DatabaseSeeder extends Seeder
+class IndoRegionSeeder extends Seeder
 {
     /**
      * Seed the application's database.

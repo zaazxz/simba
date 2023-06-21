@@ -5,7 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class indonesia_cities extends Model
+class TidakHadir extends Model
 {
     use HasFactory;
+
+    protected $table = 'logtidakhadir';
+    protected $guarded = ['id'];
+
 }

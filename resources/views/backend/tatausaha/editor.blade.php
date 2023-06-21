@@ -179,7 +179,7 @@ $url = Route::current()->getName();
                                         <select name="provinsi" id="provinsi" class="form-control" required>
                                             <option value="">Pilih provinsi...</option>
                                             @foreach ($provinces as $provinsi)
-                                            <option value="{{ str_contains($url, 'edit') ? $provinsi->code : '' }}" {{ old('provinsi', $stafftu->provinsi??'')==$provinsi->code?'selected':'' }}>{{ $provinsi->name }}</option>
+                                            <option value="{{ str_contains($url, 'edit') ? $provinsi->id : '' }}" {{ old('provinsi', $stafftu->provinsi??'')==$provinsi->id?'selected':'' }}>{{ $provinsi->name }}</option>
                                             @endforeach
                                         </select>
                                         <div class="invalid-feedback">
@@ -189,7 +189,7 @@ $url = Route::current()->getName();
                                     <div class="form-group col-md-6 col-12">
                                         <label>Kab/Kota</label>
                                         <select name="kabkota" id="kabupaten" class="form-control">
-                                            <option value="{{ $stafftu->kabkota }}">{{ is_null ($stafftu->kabkota) ? 'Pilih Kelurahan' : $stafftu->getKabkota->name }}</option>
+                                            <option value="{{ $stafftu->kabkota }}">{{ is_null ($stafftu->kabkota) ? 'Pilih Kebupaten' : $stafftu->getKabkota->name}}</option>
                                         </select>
                                         <div class="invalid-feedback">
                                             Silahkan Isi Kab/Kota

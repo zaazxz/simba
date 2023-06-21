@@ -25,12 +25,12 @@
                 {{-- Data Master --}}
                 <li>
                 <li
-                    class="dropdown {{ str_contains($url, 'tatausaha') ||
+                    class="dropdown {{
+                    str_contains($url, 'tatausaha') ||
                     str_contains($url, 'guru') ||
                     str_contains($url, 'jadwal') ||
                     str_contains($url, 'mapel') ||
-                    str_contains($url, 'statement3') ||
-                    str_contains($url, 'statement4')
+                    str_contains($url, 'kelas')
                         ? 'show active'
                         : '' }}">
                     <a href="" class="nav-link has-dropdown" data-toggle="dropdown">
@@ -46,13 +46,10 @@
                                 <a class="nav-link" href="{{ route('tatausaha.index') }}">Tata Usaha</a>
                             </li>
                             <li class="{{ str_contains($url, 'mapel') ? 'active' : '' }}">
-                                <a class="nav-link" href="#">Mata Pelajaran</a>
-                            </li>
-                            <li class="{{ str_contains($url, 'gurumapel') ? 'active' : '' }}">
-                                <a class="nav-link" href="#">Guru Mata Pelajaran</a>
+                                <a class="nav-link" href="{{ route('mapel.index') }}">Mata Pelajaran</a>
                             </li>
                             <li class="{{ str_contains($url, 'kelas') ? 'active' : '' }}">
-                                <a class="nav-link" href="#">Kelas</a>
+                                <a class="nav-link" href="{{ route('kelas.index') }}">Kelas</a>
                             </li>
                         @endif
 
@@ -72,11 +69,11 @@
                             <i class="fa-solid fa-person-chalkboard"></i> <span>Presensi</span>
                         </a>
                         <ul class="dropdown-menu" style="display: none;">
-                            <li class="{{ str_contains($url, 'kehadiran') ? 'active' : '' }}">
-                                <a class="nav-link" href="">Kehadiran</a>
+                            <li class="{{ str_contains($url, 'hadir') ? 'active' : '' }}">
+                                <a class="nav-link" href="{{ route('presensi.hadir') }}">Kehadiran</a>
                             </li>
                             <li class="{{ str_contains($url, 'konfirmasi') ? 'active' : '' }}">
-                                <a class="nav-link" href="">Konfirmasi</a>
+                                <a class="nav-link" href="{{ route('presensi.konfirmasi') }}">Konfirmasi</a>
                             </li>
                         </ul>
                     </li>
