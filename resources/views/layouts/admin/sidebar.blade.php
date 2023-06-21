@@ -102,7 +102,7 @@
                     {{-- Pengaturan --}}
                     <li>
                     <li
-                        class="dropdown {{ str_contains($url, 'whatsapp') || str_contains($url, 'mesin') || str_contains($url, 'pengguna')
+                        class="dropdown {{ str_contains($url, 'whatsapp') || str_contains($url, 'mesin') || str_contains($url, 'user')
                             ? 'show active'
                             : '' }}">
                         <a href="" class="nav-link has-dropdown">
@@ -115,8 +115,8 @@
                             <li class="{{ str_contains($url, 'mesin') ? 'active' : '' }}">
                                 <a class="nav-link" href="">Mesin Fingerprint</a>
                             </li>
-                            <li class="{{ str_contains($url, 'pengguna') ? 'active' : '' }}">
-                                <a class="nav-link" href="">Pengguna</a>
+                            <li class="{{ str_contains($url, 'user') ? 'active' : '' }}">
+                                <a class="nav-link" href="{{ route('pengaturan.user.index') }}">Pengguna</a>
                             </li>
                         </ul>
                     </li>
