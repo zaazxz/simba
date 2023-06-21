@@ -74,7 +74,7 @@
                         {{-- Recent User --}}
                     </ul>
                     <div class="text-center pt-1 pb-1">
-                      <a href="" class="btn btn-primary btn-lg btn-round">
+                      <a href="{{ route('presensi.hadir') }}" class="btn btn-primary btn-lg btn-round">
                         {{-- {{ $recents->links() }} --}}
                         Lihat Semua
                       </a>
@@ -92,7 +92,7 @@
                       {{-- Lokasi Favorite --}}
                   </ul>
                   <div class="text-center pt-1 pb-1">
-                    <a href="#" class="btn btn-primary btn-lg btn-round">
+                    <a href="{{ route('presensi.konfirmasi') }}" class="btn btn-primary btn-lg btn-round">
                       Lihat Semua
                     </a>
                   </div>
