@@ -74,21 +74,17 @@
                                                     <td>{{ $tidakhadir->unit }}</td>
                                                     <td>{{ $tidakhadir->status }}</td>
                                                     <td class="text-center">
-                                                        <a class="btn btn btn-warning btn-flat my-1" data-toggle="tooltip"
-                                                            title='Edit'
-                                                            href="{{ route('guru.edit', $guru->code ?? 'test') }}">
+                                                        <button type="button" class="btn btn btn-warning btn-flat my-1" data-toggle="modal" data-target="#updatetdkhadir{{ $tidakhadir->id }}">
                                                             <i class="fas fa-pencil-alt"></i>
-                                                        </a>
+                                                        </button>
                                                         <a class="btn btn btn-danger btn-flat my-1" data-toggle="tooltip"
                                                             title='Delete'
-                                                            href="{{ route('guru.destroy', $guru->code ?? 'test') }}">
+                                                            href="{{ route('presensi.destroy', $tidakhadir->id ?? 'test') }}">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
-                                                        <a class="btn btn btn-primary btn-flat my-1" data-toggle="tooltip"
-                                                            title='Detail'
-                                                            href="{{ route('guru.show', $guru->code ?? 'test') }}">
+                                                        <button type="button" class="btn btn btn-primary btn-flat my-1" data-toggle="modal" data-target="#info{{ $tidakhadir->id }}">
                                                             <i class="fa fa-info"></i>
-                                                        </a>
+                                                        </button>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -103,70 +99,120 @@
         </section>
     </div>
 
-    {{-- Modal --}}
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Informasi Kehadiran</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <ul class="list-group">
-                        <li class="list-group-item active text-center">
-                            Nama Guru
-                        </li>
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-3">Hari </div>
-                                <div class="col-8">: Hari</div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-3">Tanggal </div>
-                                <div class="col-8">: tanggal</div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-3">Jam Masuk </div>
-                                <div class="col-8">: Jam Masuk</div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-3">Jam Keluar </div>
-                                <div class="col-8">: Jam Keluar</div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-3">Status </div>
-                                <div class="col-8">: Izin</div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-3">Keterangan </div>
-                                <div class="col-8">: Pelatihan</div>
-                            </div>
-                        </li>
-                    </ul>
-                    <div class="row mt-2">
-                        <div class="col-12">
-                            <div class="d-grid gap-2">
-                                <button type="button" class="btn btn-secondary btn-block"
-                                    data-dismiss="modal">Close</button>
+    {{-- Modal Informasi --}}
+    @foreach ($tidakhadirs as $tidakhadir)
+        <div class="modal fade" id="info{{ $tidakhadir->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Informasi Kehadiran</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="list-group">
+                            <li class="list-group-item active text-center">
+                                {{ $tidakhadir->nama }}
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-4">Hari / Tanggal </div>
+                                    <div class="col-7">: {{ $tidakhadir->hari }} / {{ $tidakhadir->tgl }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-4">Status </div>
+                                    <div class="col-7">: {{ $tidakhadir->status }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-4">Keterangan </div>
+                                    <div class="col-7">: {{ $tidakhadir->keterangan }}</div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-4">Diperbaharui Oleh </div>
+                                    <div class="col-7">: {{ $tidakhadir->update_oleh }}</div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="row mt-2">
+                            <div class="col-12">
+                                <div class="d-grid gap-2">
+                                    <button type="button" class="btn btn-secondary btn-block"
+                                        data-dismiss="modal">Close</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endforeach
+
+    {{-- Modal Ubah Data --}}
+    @foreach ($tidakhadirs as $tidakhadir)
+        <div class="modal fade" id="updatetdkhadir{{ $tidakhadir->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Kehadiran {{ $tidakhadir->nama }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form form-vertical" method="post" action="{{ route('presensi.update', $tidakhadir->id) }}">
+                            @csrf
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="status">Status</label>
+                                            <select name="status" id="status"
+                                                class="form-control @error('status') is-invalid @enderror">
+                                                <option value="{{ $tidakhadir->status }}">{{ $tidakhadir->status }}</option>
+                                                <option value="Izin">Izin</option>
+                                                <option value="Sakit">Sakit</option>
+                                                <option value="Tugas">Tugas</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="kelas">keterangan</label>
+                                            <input type="text" id="keterangan"
+                                                class="form-control @error('keterangan') is-invalid @enderror"
+                                                name="keterangan" placeholder="Masukkan keterangan"
+                                                value="{{ old('keterangan', $tidakhadir->keterangan) }}">
+                                            @error('keterangan')
+                                                {{ $message }}
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-6">
+                                        <button type="submit" class="btn btn-primary btn-block">Simpan</button>
+                                    </div>
+                                    <div class="col-6">
+                                        <button type="button" class="btn btn-secondary btn-block"
+                                            data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
 @endsection
 
 @section('script')
