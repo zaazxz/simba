@@ -60,21 +60,36 @@
                                                 <th> # </th>
                                                 <th> Nama Guru </th>
                                                 <th> Hari / Tanggal </th>
-                                                <th> Jam Masuk </th>
-                                                <th> Jam Keluar </th>
                                                 <th> Unit </th>
+                                                <th> Status </th>
+                                                <th> </th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($hadirs as $hadir)
+                                            @foreach ($tidakhadirs as $tidakhadir)
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $hadir->nama }}</td>
-                                                    <td>{{ $hadir->hari }} / {{ $hadir->tanggal_hari }} -
-                                                        {{ $hadir->bulan }} - {{ $hadir->tahun }}</td>
-                                                    <td>{{ $hadir->masuk }}</td>
-                                                    <td>{{ $hadir->pulang ?? '' }}</td>
-                                                    <td>{{ $hadir->keterangan ?? '' }}</td>
+                                                    <td>{{ $tidakhadir->nama }}</td>
+                                                    <td>{{ $tidakhadir->hari }} / {{ $tidakhadir->tgl }}</td>
+                                                    <td>{{ $tidakhadir->unit }}</td>
+                                                    <td>{{ $tidakhadir->status }}</td>
+                                                    <td class="text-center">
+                                                        <a class="btn btn btn-warning btn-flat my-1" data-toggle="tooltip"
+                                                            title='Edit'
+                                                            href="{{ route('guru.edit', $guru->code ?? 'test') }}">
+                                                            <i class="fas fa-pencil-alt"></i>
+                                                        </a>
+                                                        <a class="btn btn btn-danger btn-flat my-1" data-toggle="tooltip"
+                                                            title='Delete'
+                                                            href="{{ route('guru.destroy', $guru->code ?? 'test') }}">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                        <a class="btn btn btn-primary btn-flat my-1" data-toggle="tooltip"
+                                                            title='Detail'
+                                                            href="{{ route('guru.show', $guru->code ?? 'test') }}">
+                                                            <i class="fa fa-info"></i>
+                                                        </a>
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

@@ -14,7 +14,7 @@
                 </div>
             </div>
 
-            <section class="section-header">
+            <section class="section-header pb-2">
                 <h5>Data kehadiran menunggu konfirmasi</h5>
             </section>
 
@@ -91,7 +91,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Kehadiran</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Kehadiran {{ $konfirmasi->nama_lengkap }}</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -107,21 +107,10 @@
                             <input type="hidden" value="{{ old('bulan', $konfirmasi->bulan) }}" name="bulan">
                             <input type="hidden" value="{{ old('tahun', $konfirmasi->tahun) }}" name="tahun">
                             <input type="hidden" value="{{ old('unit', $konfirmasi->unit) }}" name="unit">
+                            <input type="hidden" value="{{ old('nama', $konfirmasi->nama_lengkap) }}" name="nama">
 
                             <div class="form-body">
                                 <div class="row">
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label for="nama">Nama Guru</label>
-                                            <input type="text" id="nama"
-                                                class="form-control @error('nama') is-invalid @enderror"
-                                                name="nama" placeholder="Masukkan Nama"
-                                                value="{{ old('nama', $konfirmasi->nama_lengkap) }}">
-                                            @error('nama')
-                                                {{ $message }}
-                                            @enderror
-                                        </div>
-                                    </div>
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label for="status">Status</label>

@@ -16,10 +16,10 @@ class PresensiController extends Controller
     public function hadir()
     {
         return view('backend.presensi.index', [
-            'title'             => 'Data Hadir Hari Ini',
-            'hadir_count'       => Hadir::count(),
-            'tdkhadir_count'    => TidakHadir::where('tgl', Carbon::today())->count(),
-            'hadirs'            => Hadir::all()
+            'title'                 => 'Data Hadir Hari Ini',
+            'hadir_count'           => Hadir::count(),
+            'tidakhadir_count'      => TidakHadir::where('tgl', Carbon::today())->count(),
+            'hadirs'                => Hadir::all()
         ]);
     }
 
@@ -28,7 +28,7 @@ class PresensiController extends Controller
     {
 
         $hadir = Hadir::where('uid', '!=', 'NULL')->select('uid')->get()->toArray();
-        $tdkhadir = TidakHadir::where('uid', '!=', 'NULL')->select('uid')->get()->toArray();
+        $tdkhadir = TidakHadir::where('tgl', '=', Carbon::today())->where('uid', '!=', 'NULL')->select('uid')->get()->toArray();
 
         return view('backend.presensi.konfirmasi', [
             'title'         => 'Konfirmasi',
@@ -37,13 +37,15 @@ class PresensiController extends Controller
     }
 
     // Tidak Hadir Hari Ini
-    public function tdkhadir()
+    public function tidak()
     {
 
-        return view('backend.presensi.index', [
-            'title'         => 'Data Tidak Hadir Hari Ini',
-            'hadir_count'   => Hadir::count(),
-            'hadirs'        => Hadir::all()
+        return view('backend.presensi.tdkhadir', [
+            'title'                 => 'Data Tidak Hadir Hari Ini',
+            'hadir_count'           => Hadir::count(),
+            'tidakhadir_count'      => TidakHadir::where('tgl', Carbon::today())->count(),
+            'hadirs'                => Hadir::all(),
+            'tidakhadirs'           => TidakHadir::where('tgl', Carbon::today())->get()
         ]);
     }
 

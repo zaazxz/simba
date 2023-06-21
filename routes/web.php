@@ -98,6 +98,9 @@ Route::group(['middleware' => 'auth'], function () {
         // Hadir
         Route::get('/hadir', [PresensiController::class, 'hadir'])->name('presensi.hadir');
 
+        // Tidak Hadir
+        Route::get('/tidak', [PresensiController::class, 'tidak'])->name('presensi.tidak');
+
         // Konfirmasi
         Route::get('/konfirmasi', [PresensiController::class, 'konfirmasi'])->name('presensi.konfirmasi');
         Route::post('/konfirmasi/store', [PresensiController::class, 'store'])->name('presensi.store');
