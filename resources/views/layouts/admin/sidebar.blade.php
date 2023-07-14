@@ -8,8 +8,8 @@
         {{-- Logo --}}
         <div class="sidebar-brand">
             <a href="/">
-                <img width="75" src="{{ asset('backend/img/logo/baknus.png') }}" alt="IPA"
-                    style="margin-top: 10px">
+                <img src="{{ asset('Logo SIMBA/Logo (2)/main-logo (2).png') }}" alt="IPA"
+                    style="margin-top: 10px" width="100px">
             </a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">

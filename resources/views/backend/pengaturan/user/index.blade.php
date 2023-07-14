@@ -83,8 +83,7 @@
                                                     <td>{{ $user->role }}</td>
                                                     <td>{{ $user->notelp }}</td>
                                                     <td>
-                                                        <a
-                                                            href="{{ route('pengaturan.user.status', ['code' => $user->code]) }}">{!! $user->status_text !!}
+                                                        <a href="{{ route('pengaturan.user.status', ['code' => $user->code]) }}">{!! $user->status_text !!}</a>
                                                     </td>
                                                     <td class="text-center">
                                                         <a class="btn btn btn-warning btn-flat my-1" data-toggle="tooltip"

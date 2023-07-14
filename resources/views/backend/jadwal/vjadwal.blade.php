@@ -26,10 +26,10 @@ $url = Route::current()->getName();
                         <a class="nav-link {{ str_contains($url, 'index') ? 'active' : '' }}" href="{{ route('jadwal.index') }}">Semua <span class="{{ str_contains($url, 'index') ? 'badge badge-white' : 'badge badge-primary' }}"></span></a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link {{ str_contains($url, 'aktif') ? 'active' : '' }}" href="{{ route('jadwal.today') }}">Hari ini <span class="{{ str_contains($url, 'today') ? 'badge badge-white' : 'badge badge-primary' }}"></span></a>
+                        <a class="nav-link {{ str_contains($url, 'today') ? 'active' : '' }}" href="{{ route('jadwal.today') }}">Hari ini <span class="{{ str_contains($url, 'today') ? 'badge badge-white' : 'badge badge-primary' }}"></span></a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link {{ str_contains($url, 'non') ? 'active' : '' }}" href="{{ route('jadwal.tommorow') }}">Esok Hari <span class="{{ str_contains($url, 'esok') ? 'badge badge-white' : 'badge badge-primary' }}"></span></a>
+                        <a class="nav-link {{ str_contains($url, 'tommorow') ? 'active' : '' }}" href="{{ route('jadwal.tommorow') }}">Esok Hari <span class="{{ str_contains($url, 'esok') ? 'badge badge-white' : 'badge badge-primary' }}"></span></a>
                       </li>
                     </ul>
                   </div>

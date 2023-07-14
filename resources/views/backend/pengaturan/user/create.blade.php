@@ -13,7 +13,7 @@ $url = Route::current()->getName();
             <h1>Kembali</h1>
             <div class="section-header-breadcrumb">
               <div class="breadcrumb-item active"><a href="{{ route('home') }}">Dashboard</a></div>
-              <div class="breadcrumb-item"><a href="{{ route('pengaturan.user') }}">User</a></div>
+              <div class="breadcrumb-item"><a href="{{ route('pengaturan.user.index') }}">User</a></div>
               <div class="breadcrumb-item">Input User Baru</div>
             </div>
           </div>
