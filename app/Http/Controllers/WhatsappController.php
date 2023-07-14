@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Whatsapp;
 use Illuminate\Http\Request;
 
 class WhatsappController extends Controller
@@ -9,15 +10,11 @@ class WhatsappController extends Controller
     public function index()
     {
         return view('backend.pengaturan.whatsapp.index', [
-            'title' => 'WhatsApp Gateway'
+            'title'         => 'WhatsApp Gateway',
+            'whatsapps'     => Whatsapp::all()
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //

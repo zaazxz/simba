@@ -1,5 +1,5 @@
 @extends('layouts.admin.app')
-@section('title', 'WhatsApp Gateway')
+@section('title', 'Whatsapp Gateway')
 @section('content')
     @php
         $url = Route::current()->getName();
@@ -13,6 +13,10 @@
                     <div class="breadcrumb-item">WhatsApp Gateway</div>
                 </div>
             </div>
+
+            <section class="section-header pb-2">
+                <h5>Konfigurasi WhatsApp Gateway</h5>
+            </section>
 
             <div class="row">
                 <div class="col-12">
@@ -28,7 +32,7 @@
             </div>
 
             <div class="section-body">
-                {{-- <div class="row">
+                <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
@@ -38,29 +42,34 @@
                                         <thead>
                                             <tr>
                                                 <th> # </th>
-                                                <th> Nama Guru </th>
-                                                <th> Hari / Tanggal</th>
-                                                <th> Jam Masuk </th>
-                                                <th> Jam Keluar </th>
-                                                <th> Unit </th>
+                                                <th> ID </th>
+                                                <th> Request</th>
+                                                <th> Type Autorespon </th>
                                                 <th> </th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($confirm as $konfirmasi)
+                                            @foreach ($whatsapps as $whatsapp)
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $konfirmasi->nama_lengkap }}</td>
-                                                    <td>{{ $konfirmasi->hari }} / {{ $konfirmasi->tanggal }} -
-                                                        {{ $konfirmasi->bulan }} - {{ $konfirmasi->tahun }}</td>
-                                                    <td>{{ $konfirmasi->jam_masuk }}</td>
-                                                    <td>{{ $konfirmasi->jam_keluar }}</td>
-                                                    <td>{{ $konfirmasi->unit }}</td>
+                                                    <td>{{ $whatsapp->id_setting }}</td>
+                                                    <td>{{ $whatsapp->request }}</td>
+                                                    <td>{{ $whatsapp->typeautorespon }}</td>
                                                     <td class="text-center">
                                                         <button class="btn btn btn-warning btn-flat my-1"
                                                             data-toggle="modal"
-                                                            data-target="#exampleModal{{ $konfirmasi->UID }}">
+                                                            data-target="#editwhatsapp{{ $whatsapp->id_setting }}">
                                                             <i class="fa fa-pencil"></i>
+                                                        </button>
+                                                        <a class="btn btn btn-danger btn-flat my-1" data-toggle="tooltip"
+                                                            title='Delete'
+                                                            href="{{ route('guru.destroy', $whatsapp->id_setting ?? 'test') }}">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                        <button class="btn btn btn-primary btn-flat my-1"
+                                                            data-toggle="modal"
+                                                            data-target="#showwhatsapp{{ $whatsapp->id_setting }}">
+                                                            <i class="fa fa-info"></i>
                                                         </button>
                                                     </td>
                                                 </tr>
@@ -71,17 +80,85 @@
                             </div>
                         </div>
                     </div>
-                </div> --}}
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <h1 class="text-center my-5">Coming Soon!</h1>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
     </div>
+
+    {{-- Show --}}
+    @foreach ($whatsapps as $whatsapp)
+        <div class="modal fade" id="showwhatsapp{{ $whatsapp->id_setting }}" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Konfigurasi Whatsapp Gateway</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="Request">Type Autorespon</label>
+                                        <input type="text" id="keterangan"
+                                            class="form-control @error('keterangan') is-invalid @enderror" name="keterangan"
+                                            placeholder="Masukkan Nama keterangan" value="{{ $whatsapp->typeautorespon }}"
+                                            disabled>
+                                        @error('keterangan')
+                                            {{ $message }}
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="kelas">Autorespon</label>
+                                        <div class="form-floating">
+                                            <textarea class="form-control" id="floatingTextarea" style="height: 375px; resize: none;" disabled>{{ $whatsapp->autorespon }}</textarea>
+                                        </div>
+                                        @error('keterangan')
+                                            {{ $message }}
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="Request">Request</label>
+                                        <input type="text" id="keterangan"
+                                            class="form-control @error('keterangan') is-invalid @enderror" name="keterangan"
+                                            placeholder="Masukkan Nama keterangan" value="{{ $whatsapp->request }}"
+                                            disabled>
+                                        @error('keterangan')
+                                            {{ $message }}
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="kelas">Keterangan Request</label>
+                                        <div class="form-floating">
+                                            <textarea class="form-control" id="floatingTextarea" style="height: 375px; resize: none;" disabled>{{ $whatsapp->keterangan_request }}</textarea>
+                                        </div>
+                                        @error('keterangan')
+                                            {{ $message }}
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
 @endsection
 
 @section('script')

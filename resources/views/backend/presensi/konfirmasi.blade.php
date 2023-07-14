@@ -32,13 +32,9 @@
             </div>
 
             <div class="section-body">
-                <!--<p class="section-lead"></p>-->
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            {{-- <div class="card-header">
-                    <h4>All People</h4>
-                  </div> --}}
                             <div class="card-body">
                                 <div class="clearfix mb-3"></div>
                                 <div class="table-responsive">

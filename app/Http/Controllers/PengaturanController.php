@@ -77,9 +77,9 @@ class PengaturanController extends Controller
         ]);
 
         if ($data) {
-            return redirect()->route('pengaturan.user')->with('message', 'Input Data User baru berhasil');
+            return redirect()->route('pengaturan.user.index')->with('message', 'Input Data User baru berhasil');
         } else {
-            return redirect()->route('pengaturan.user')->with('message', 'Input Data User baru gagal');
+            return redirect()->route('pengaturan.user.index')->with('message', 'Input Data User baru gagal');
         }
     }
 
