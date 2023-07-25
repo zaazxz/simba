@@ -329,7 +329,7 @@ class UserController extends Controller
     {
         $id_kecamatan = $request->id_kecamatan;
         $kelurahans = Village::where('district_id', $id_kecamatan)->get();
-        $option = '<option>Pilih Kecamatan...</option>';
+        $option = '<option>Pilih Kelurahan...</option>';
         foreach ($kelurahans as $kelurahan) {
             $option.= "<option value='$kelurahan->id'>$kelurahan->name</option>";
         }

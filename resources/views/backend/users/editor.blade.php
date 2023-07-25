@@ -206,7 +206,7 @@ $url = Route::current()->getName();
                                     <div class="form-group col-md-6 col-12">
                                         <label>Kab/Kota</label>
                                         <select name="kabkota" id="kabupaten" class="form-control">
-                                            <option value="{{ $teacher->kabkota??'' }}">{{ is_null ($teacher->kabkota) ? 'Pilih Kelurahan' : $teacher->getKabkota->name }}</option>
+                                            <option value="{{ $teacher->kabkota??'' }}">{{ is_null ($teacher->kabkota) ? 'Pilih Kabupaten' : $teacher->getKabkota->name }}</option>
                                         </select>
                                         <div class="invalid-feedback">
                                             Silahkan Isi Kab/Kota

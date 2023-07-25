@@ -19,6 +19,7 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('../backend/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('../backend/css/components.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 
 <body class="layout-3">
@@ -469,11 +470,11 @@
 
             </div>
             <footer class="main-footer">
-                <div class="footer-right">
+                <div class="footer-right" id="footerLeftDashboard">
                     Copyright &copy; 2022 <div class="bullet"></div> Development By <a href="#">IoTech
                         Studio</a>
                 </div>
-                <div class="footer-left">
+                <div class="footer-left" id="footerRightDashboard">
                     Sistem Informasi Baknus (SIMBA) Ver 1.0.0
                 </div>
             </footer>

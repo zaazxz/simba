@@ -1,9 +1,22 @@
 /* ==== Login Page ==== */
+#footerLeftMain{ 
+    margin-left: -36%;
+}
+
 /* Tablet Screen */
 @media screen and (min-width: 768px) and (max-width: 1023px) {
     #loginForm {
         margin-top: 10vh;
     }
+
+    #footerLeftMain {
+        margin-left: 40%;
+    }
+
+    #footerRightMain {
+        margin-right: 21%;
+    }
+
 }
 
 /* Mobile Screen */
@@ -11,4 +24,23 @@
     #loginForm {
         margin-top: 10vh;
     }
+
+    #footerLeftMain {
+        margin-left: 30%;
+    }
+
+    #footerRightMain {
+        margin-right: 15%;
+    }
+
+    #footerRightDashboard {
+        margin-left: 65px;
+    }
+
+    #footerLeftDashboard{
+        margin-right: 50px;
+    }
+
 }
+
+
