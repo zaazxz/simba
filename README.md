@@ -1,5 +1,4 @@
-<p align="center">
-    <img src="../simba/public/Logo%20SIMBA/Logo%20(2)/main-logo%20(2).png" width="400">
+<p align="center"><img src="https://github.com/zaazxz/simba/blob/40c909b4a3ebcb6106cc646528689b1c814451e3/public/Logo%20SIMBA/Logo%20(2)/width-logo%20(2).png" width="400">
 </p>
 
 ## About SIMBA
