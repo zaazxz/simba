@@ -23,7 +23,7 @@
                 @elseif (Auth::user()->role == 'Guru')
                     href = '{{ route('guru.show', ['code' => Auth::user()->code]) }}'
                 @elseif (Auth::user()->role == 'Tata Usaha')
-                    href = '{{ route('tatausaha.show', ['code' => Auth::user()->code]) }}'
+                    href = '{{ route('guru.show', ['code' => Auth::user()->code]) }}'
                 @endif
 
                 class="dropdown-item has-icon">
