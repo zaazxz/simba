@@ -7,7 +7,6 @@ use App\Models\Regency;
 use App\Models\User;
 use App\Models\Village;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -25,8 +24,6 @@ class UserController extends Controller
             'teachers_ak'  => User::where('role', '!=', 'Admin')->where('role', '!=', 'Tata Usaha')->where('status', '=', '1')->count(),
             'teachers_pe'  => User::where('role', '!=', 'Admin')->where('role', '!=', 'Tata Usaha')->where('status', '=', '0')->count(),
         ];
-        //Log::channel('slack')->info('Data Guru', $data);
-        // Log::channel('slack')->error('Data Guru', $data);
         return view('backend.users.guru', $data);
     }
 
@@ -83,9 +80,24 @@ class UserController extends Controller
         $gtk->email = $request->email;
         $gtk->role = $request->role;
         $gtk->unit = $request->unit;
-        $gtk->password = bcrypt('GantiSaya!');
+
+        if ($request->role == 'Guru') {
+            $gtk->password = bcrypt('Guru123');
+        } elseif ($request->role == 'Tata Usaha') {
+            $gtk->password = bcrypt('Tatausaha123');
+        } else {
+            $gtk->password = bcrypt('Hrd123');
+        }
+
+
         $gtk->save();
-        return redirect()->route('guru.index')->with('message', 'Input Data GTK baru berhasil dibuat');
+        if ($request->role == 'Guru') {
+            return redirect()->route('guru.index')->with('message', 'Input Data GTK baru berhasil dibuat');
+        } elseif ($request->role == 'Tata Usaha') {
+            return redirect()->route('tatausaha.index')->with('message', 'Input Data GTK baru berhasil dibuat');
+        } else {
+            return redirect()->route('pengaturan.user.index')->with('message', 'Input Data GTK baru berhasil dibuat');
+        }
     }
 
     /**
@@ -254,9 +266,6 @@ class UserController extends Controller
         $tu = User::where('code', $id)->first();
         if ($request->hasFile('picture')) {
             $picture = $request->file('picture');
-            // if (file_exists(public_path('images/users/'.$pro->photo))) {
-            //     unlink(public_path('images/users/'.$pro->photo));
-            // }
             $name = $tu->name . '-' . $tu->id . '.' . $picture->getClientOriginalExtension();
             $picture->move('images/users/', $name);
             $tu->photo = $name;

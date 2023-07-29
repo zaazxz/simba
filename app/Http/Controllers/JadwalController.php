@@ -1,19 +1,17 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Imports\ImportJadwals;
 use App\Models\vjadwal;
 use Illuminate\Http\Request;
+use App\Imports\ImportJadwals;
 use Illuminate\Support\Carbon;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
 class JadwalController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // Index
     public function index()
     {
         $data = [
@@ -24,18 +22,7 @@ class JadwalController extends Controller
         return view('backend.jadwal.vjadwal', $data);
     }
 
-    public function import(Request $request)
-    {
-        $this->validate($request, [
-            'file' => 'required|mimes:csv,xls,xlsx'
-        ]);
-        $file = $request->file('file');
-        $nama_file = rand().$file->getClientOriginalName();
-        $file->move('idocs', $nama_file);
-        Excel::import(new ImportJadwals, public_path('/idocs/'.$nama_file));
-        return redirect()->route('jadwal.index')->withSuccess('Status berhasil diubah');
-    }
-
+    // Hari Ini
     public function today()
     {
         $data = [
@@ -46,14 +33,38 @@ class JadwalController extends Controller
         return view('backend.jadwal.vjadwal', $data);
     }
 
+    // Besok
     public function besok()
     {
         $data = [
             'title' => 'Jadwal Esok Hari',
             'vjadwals' => vjadwal::where('hari', Carbon::tomorrow()->isoFormat('dddd'))->get(),
         ];
-        // dd($data);
         return view('backend.jadwal.vjadwal', $data);
+    }
+
+    // Khusus Pribadi
+    public function khusus()
+    {
+        $data = [
+            'title' => 'Jadwal ' . Auth::user()->name,
+            'hari'  => Carbon::today()->isoFormat('dddd'),
+            'vjadwals' => vjadwal::where('nama_lengkap', Auth::user()->name)->get(),
+        ];
+        return view('backend.jadwal.vjadwal', $data);
+    }
+
+    // Import
+    public function import(Request $request)
+    {
+        $this->validate($request, [
+            'file' => 'required|mimes:csv,xls,xlsx'
+        ]);
+        $file = $request->file('file');
+        $nama_file = rand().$file->getClientOriginalName();
+        $file->move('idocs', $nama_file);
+        Excel::import(new ImportJadwals, public_path('/idocs/'.$nama_file));
+        return redirect()->route('jadwal.index')->withSuccess('Status berhasil diubah');
     }
 
     /**
