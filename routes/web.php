@@ -69,6 +69,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/today', [JadwalController::class, 'today'])->name('jadwal.today');
         Route::get('/tommorow', [JadwalController::class, 'besok'])->name('jadwal.tommorow');
         Route::post('/import', [JadwalController::class, 'import'])->name('jadwal.import');
+        Route::get('/khusus', [JadwalController::class, 'khusus'])->name('jadwal.khusus');
     });
 
     Route::prefix('kelas')->group(function()  {
@@ -108,6 +109,9 @@ Route::group(['middleware' => 'auth'], function () {
         // Konfirmasi
         Route::get('/konfirmasi', [PresensiController::class, 'konfirmasi'])->name('presensi.konfirmasi');
         Route::post('/konfirmasi/store', [PresensiController::class, 'store'])->name('presensi.store');
+
+        // Presensi
+        Route::get('/', [PresensiController::class, 'presensi'])->name('presensi.data');
 
     });
 

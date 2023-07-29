@@ -12,6 +12,19 @@ use Illuminate\Support\Facades\Auth;
 
 class PresensiController extends Controller
 {
+
+    // Presensi
+    public function presensi() {
+
+        $hadir = Hadir::where('uid', '!=', 'NULL')->select('uid')->get()->toArray();
+        $tdkhadir = TidakHadir::where('tgl', '=', Carbon::today())->where('uid', '!=', 'NULL')->select('uid')->get()->toArray();
+
+        return view('backend.presensi.presensi', [
+            'title'                 => 'Persentase Data Presensi',
+            'confirm'               => Konfirmasi::wherenotin('uid', $hadir)->wherenotin('uid', $tdkhadir)->get(),
+        ]);
+    }
+
     // Kehadiran Hari Ini
     public function hadir()
     {
