@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePersentaseAbsenTables extends Migration
+class CreatePersentaseBulananTables extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreatePersentaseAbsenTables extends Migration
      */
     public function up()
     {
-        Schema::create('persentase_absen', function (Blueprint $table) {
+        Schema::create('persentase_bulanan', function (Blueprint $table) {
             $table->id();
             $table->uuid('uid')->nullable();
             $table->string('nama');
-            $table->integer('jadwal_keseluruhan')->nullable();
+            $table->integer('jadwal_bulanan')->nullable();
             $table->integer('terlaksana')->nullable();
             $table->integer('hadir')->nullable();
             $table->integer('tidak_hadir')->nullable();

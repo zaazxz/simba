@@ -111,7 +111,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/konfirmasi/store', [PresensiController::class, 'store'])->name('presensi.store');
 
         // Presensi
-        Route::get('/', [PresensiController::class, 'presensi'])->name('presensi.data');
+        Route::get('/bulanan', [PresensiController::class, 'bulanan'])->name('presensi.bulanan');
+        Route::get('/keseluruhan', [PresensiController::class, 'keseluruhan'])->name('presensi.keseluruhan');
+        Route::get('/keseluruhan/reset', [PresensiController::class, 'reset'])->name('presensi.reset');
 
     });
 

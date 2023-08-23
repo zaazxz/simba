@@ -7,22 +7,50 @@ use App\Models\Hadir;
 use App\Models\Konfirmasi;
 use App\Models\TidakHadir;
 use Illuminate\Http\Request;
+use App\Models\PersentaseAbsensi;
+use App\Models\PersentaseBulanan;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class PresensiController extends Controller
 {
 
-    // Presensi
-    public function presensi() {
-
-        $hadir = Hadir::where('uid', '!=', 'NULL')->select('uid')->get()->toArray();
-        $tdkhadir = TidakHadir::where('tgl', '=', Carbon::today())->where('uid', '!=', 'NULL')->select('uid')->get()->toArray();
+    // Presensi Bulanan
+    public function bulanan()
+    {
 
         return view('backend.presensi.presensi', [
-            'title'                 => 'Persentase Data Presensi',
-            'confirm'               => Konfirmasi::wherenotin('uid', $hadir)->wherenotin('uid', $tdkhadir)->get(),
+            'title'             => 'Persentase Data Presensi Bulanan',
+            'datas'             => PersentaseBulanan::all(),
+            'count_bulan'       => PersentaseAbsensi::count(),
+            'count_keseluruhan' => PersentaseAbsensi::count()
         ]);
+    }
+
+    // Presensi Keseluruhan
+    public function keseluruhan()
+    {
+        return view('backend.presensi.presensi', [
+            'title'             => 'Persentase Data Presensi Keseluruhan',
+            'datas'             => PersentaseAbsensi::all(),
+            'count_bulan'       => PersentaseAbsensi::count(),
+            'count_keseluruhan' => PersentaseAbsensi::count()
+        ]);
+    }
+
+    // Presensi Keseluruhan Reset
+    public function reset()
+    {
+        DB::table('persentase_absen')
+            ->update([
+                'jadwal_keseluruhan'    => DB::raw("0"),
+                'terlaksana'            => DB::raw("0"),
+                'hadir'                 => DB::raw("0"),
+                'tidak_hadir'           => DB::raw("0"),
+            ]);
+
+        return redirect()->route('presensi.keseluruhan')->with('message', 'Reset Data Kehadiran Berhasil');
     }
 
     // Kehadiran Hari Ini
