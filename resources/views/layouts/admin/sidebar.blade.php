@@ -64,13 +64,13 @@
                     {{-- Presensi --}}
                     <li>
                     <li
-                        class="dropdown {{ str_contains($url, 'kehadiran') || str_contains($url, 'konfirmasi') ? 'show active' : '' }} || {{ str_contains($url, 'data') ? 'show active' : '' }}">
+                        class="dropdown {{ str_contains($url, 'kehadiran') || str_contains($url, 'konfirmasi') || str_contains($url, 'keseluruhan') || str_contains($url, 'bulanan') ? 'show active' : '' }}">
                         <a href="" class="nav-link has-dropdown">
                             <i class="fa-solid fa-person-chalkboard"></i> <span>Presensi</span>
                         </a>
                         <ul class="dropdown-menu" style="display: none;">
-                            <li class="{{ str_contains($url, 'data') ? 'active' : '' }}">
-                                <a class="nav-link" href="{{ route('presensi.data') }}">Data Presensi</a>
+                            <li class="{{ str_contains($url, 'keseluruhan') || str_contains($url, 'bulanan') ? 'active' : '' }}">
+                                <a class="nav-link" href="{{ route('presensi.keseluruhan') }}">Data Presensi</a>
                             </li>
                             <li class="{{ str_contains($url, 'hadir') ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ route('presensi.hadir') }}">Kehadiran</a>
