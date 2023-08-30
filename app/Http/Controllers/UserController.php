@@ -1,12 +1,14 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Regency;
+use App\Models\Village;
 use App\Models\District;
 use App\Models\Province;
-use App\Models\Regency;
-use App\Models\User;
-use App\Models\Village;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
@@ -197,8 +199,7 @@ class UserController extends Controller
      */
     public function destroy($code)
     {
-        $teacher = User::where('code', $code);
-        $teacher->delete();
+        DB::table('users')->where('code', $code)->delete();
         return back()->with('message', 'Pengguna berhasil dihapus');
     }
 

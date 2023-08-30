@@ -214,7 +214,7 @@
                                                             @elseif ($data->jadwal_keseluruhan == 0)
                                                                 0%
                                                             @else
-                                                                {{ ($data->terlaksana / $data->jadwal_keseluruhan) * 100 }}%
+                                                                {{ round(($data->terlaksana / $data->jadwal_keseluruhan) * 100) }}%
                                                             @endif
                                                         </div>
                                                         <div class="font-weight-bold mb-1">Jadwal Keseluruhan Terlaksana
@@ -223,16 +223,16 @@
                                                             <div class="progress-bar" role="progressbar"
                                                                 {{-- Data Now --}}
                                                                 @if ($data->terlaksana == 0) data-width="0%"
-                                                        @elseif ($data->jadwal_keseluruhan == 0)
-                                                            data-width="0%"
-                                                        @else
-                                                            data-width="{{ ($data->terlaksana / $data->jadwal_keseluruhan) * 100 }}%" @endif
+                                                                @elseif ($data->jadwal_keseluruhan == 0)
+                                                                    data-width="0%"
+                                                                @else
+                                                                    data-width="{{ round(($data->terlaksana / $data->jadwal_keseluruhan) * 100) }}%" @endif
                                                                 {{-- Value Now --}}
                                                                 @if ($data->terlaksana == 0) aria-valuenow="0"
                                                         @elseif ($data->jadwal_keseluruhan == 0)
                                                             aria-valuenow="0"
                                                         @else
-                                                            aria-valuenow="{{ ($data->terlaksana / $data->jadwal_keseluruhan) * 100 }}" @endif
+                                                            aria-valuenow="{{ round(($data->terlaksana / $data->jadwal_keseluruhan) * 100) }}" @endif
                                                                 aria-valuemin="0" aria-valuemax="100"
                                                                 style="width: 80%;">
                                                             </div>
@@ -244,27 +244,27 @@
                                                         <div class="text-small float-right font-weight-bold text-muted">
                                                             @if ($data->hadir == 0)
                                                                 0%
-                                                            @elseif ($data->terlaksana == 0)
+                                                            @elseif ($data->jadwal_keseluruhan == 0)
                                                                 0%
                                                             @else
-                                                                {{ ($data->hadir / $data->terlaksana) * 100 }}%
+                                                                {{ round(($data->hadir / $data->jadwal_keseluruhan) * 100) }}%
                                                             @endif
                                                         </div>
                                                         <div class="font-weight-bold mb-1">Hadir Keseluruhan</div>
                                                         <div class="progress" data-height="3" style="height: 3px;">
                                                             <div class="progress-bar bg-success" role="progressbar"
                                                                 {{-- Data Now --}}
-                                                                @if ($data->terlaksana == 0) data-width="0%"
+                                                                @if ($data->jadwal_keseluruhan == 0) data-width="0%"
                                                         @elseif ($data->hadir == 0)
                                                             data-width="0%"
                                                         @else
-                                                            data-width="{{ ($data->hadir / $data->terlaksana) * 100 }}%" @endif
+                                                            data-width="{{ round(($data->hadir / $data->jadwal_keseluruhan) * 100) }}%" @endif
                                                                 {{-- Value Now --}}
-                                                                @if ($data->terlaksana == 0) aria-valuenow="0"
+                                                                @if ($data->jadwal_keseluruhan == 0) aria-valuenow="0"
                                                         @elseif ($data->hadir == 0)
                                                             aria-valuenow="0"
                                                         @else
-                                                            aria-valuenow="{{ ($data->hadir / $data->terlaksana) * 100 }}" @endif
+                                                            aria-valuenow="{{ round(($data->hadir / $data->jadwal_keseluruhan) * 100) }}" @endif
                                                                 aria-valuemin="0" aria-valuemax="100"
                                                                 style="width: 80%;">
                                                             </div>
@@ -276,27 +276,27 @@
                                                         <div class="text-small float-right font-weight-bold text-muted">
                                                             @if ($data->tidak_hadir == 0)
                                                                 0%
-                                                            @elseif ($data->terlaksana == 0)
+                                                            @elseif ($data->jadwal_keseluruhan == 0)
                                                                 0%
                                                             @else
-                                                                {{ ($data->tidak_hadir / $data->terlaksana) * 100 }}%
+                                                                {{ round(($data->tidak_hadir / $data->jadwal_keseluruhan) * 100) }}%
                                                             @endif
                                                         </div>
                                                         <div class="font-weight-bold mb-1">Jadwal Tidak Hadir</div>
                                                         <div class="progress" data-height="3" style="height: 3px;">
                                                             <div class="progress-bar bg-danger" role="progressbar"
                                                                 {{-- Data Now --}}
-                                                                @if ($data->terlaksana == 0) data-width="0%"
+                                                                @if ($data->jadwal_keseluruhan == 0) data-width="0%"
                                                         @elseif ($data->tidak_hadir == 0)
                                                             data-width="0%"
                                                         @else
-                                                            data-width="{{ ($data->tidak_hadir / $data->terlaksana) * 100 }}%" @endif
+                                                            data-width="{{ round(($data->tidak_hadir / $data->jadwal_keseluruhan) * 100) }}%" @endif
                                                                 {{-- Value Now --}}
-                                                                @if ($data->terlaksana == 0) aria-valuenow="0"
+                                                                @if ($data->jadwal_keseluruhan == 0) aria-valuenow="0"
                                                         @elseif ($data->tidak_hadir == 0)
                                                             aria-valuenow="0"
                                                         @else
-                                                            aria-valuenow="{{ ($data->tidak_hadir / $data->terlaksana) * 100 }}" @endif
+                                                            aria-valuenow="{{ round(($data->tidak_hadir / $data->jadwal_keseluruhan) * 100) }}" @endif
                                                                 aria-valuemin="0" aria-valuemax="100"
                                                                 style="width: 80%;">
                                                             </div>
@@ -313,7 +313,7 @@
                                                             @elseif ($data->jadwal_bulanan == 0)
                                                                 0%
                                                             @else
-                                                                {{ ($data->terlaksana / $data->jadwal_bulanan) * 100 }}%
+                                                                {{ round(($data->terlaksana / $data->jadwal_bulanan) * 100) }}%
                                                             @endif
                                                         </div>
                                                         <div class="font-weight-bold mb-1">Jadwal Bulanan Terlaksana</div>
@@ -324,13 +324,13 @@
                                                         @elseif ($data->jadwal_bulanan == 0)
                                                             data-width="0%"
                                                         @else
-                                                            data-width="{{ ($data->terlaksana / $data->jadwal_bulanan) * 100 }}%" @endif
+                                                            data-width="{{ round(($data->terlaksana / $data->jadwal_bulanan) * 100) }}%" @endif
                                                                 {{-- Value Now --}}
                                                                 @if ($data->terlaksana == 0) aria-valuenow="0"
                                                         @elseif ($data->jadwal_bulanan == 0)
                                                             aria-valuenow="0"
                                                         @else
-                                                            aria-valuenow="{{ ($data->terlaksana / $data->jadwal_bulanan) * 100 }}" @endif
+                                                            aria-valuenow="{{ round(($data->terlaksana / $data->jadwal_bulanan) * 100) }}" @endif
                                                                 aria-valuemin="0" aria-valuemax="100"
                                                                 style="width: 80%;">
                                                             </div>
@@ -342,27 +342,27 @@
                                                         <div class="text-small float-right font-weight-bold text-muted">
                                                             @if ($data->hadir == 0)
                                                                 0%
-                                                            @elseif ($data->terlaksana == 0)
+                                                            @elseif ($data->jadwal_bulanan == 0)
                                                                 0%
                                                             @else
-                                                                {{ ($data->hadir / $data->terlaksana) * 100 }}%
+                                                                {{ round(($data->hadir / $data->jadwal_bulanan) * 100) }}%
                                                             @endif
                                                         </div>
                                                         <div class="font-weight-bold mb-1">Hadir Bulanan</div>
                                                         <div class="progress" data-height="3" style="height: 3px;">
                                                             <div class="progress-bar bg-success" role="progressbar"
                                                                 {{-- Data Now --}}
-                                                                @if ($data->terlaksana == 0) data-width="0%"
+                                                                @if ($data->jadwal_bulanan == 0) data-width="0%"
                                                         @elseif ($data->hadir == 0)
                                                             data-width="0%"
                                                         @else
-                                                            data-width="{{ ($data->hadir / $data->terlaksana) * 100 }}%" @endif
+                                                            data-width="{{ round(($data->hadir / $data->jadwal_bulanan) * 100) }}%" @endif
                                                                 {{-- Value Now --}}
-                                                                @if ($data->terlaksana == 0) aria-valuenow="0"
+                                                                @if ($data->jadwal_bulanan == 0) aria-valuenow="0"
                                                         @elseif ($data->hadir == 0)
                                                             aria-valuenow="0"
                                                         @else
-                                                            aria-valuenow="{{ ($data->hadir / $data->terlaksana) * 100 }}" @endif
+                                                            aria-valuenow="{{ round(($data->hadir / $data->jadwal_bulanan) * 100) }}" @endif
                                                                 aria-valuemin="0" aria-valuemax="100"
                                                                 style="width: 80%;">
                                                             </div>
@@ -374,27 +374,27 @@
                                                         <div class="text-small float-right font-weight-bold text-muted">
                                                             @if ($data->tidak_hadir == 0)
                                                                 0%
-                                                            @elseif ($data->terlaksana == 0)
+                                                            @elseif ($data->jadwal_bulanan == 0)
                                                                 0%
                                                             @else
-                                                                {{ ($data->tidak_hadir / $data->terlaksana) * 100 }}%
+                                                                {{ round(($data->tidak_hadir / $data->jadwal_bulanan) * 100) }}%
                                                             @endif
                                                         </div>
                                                         <div class="font-weight-bold mb-1">Jadwal Tidak Hadir</div>
                                                         <div class="progress" data-height="3" style="height: 3px;">
                                                             <div class="progress-bar bg-danger" role="progressbar"
                                                                 {{-- Data Now --}}
-                                                                @if ($data->terlaksana == 0) data-width="0%"
+                                                                @if ($data->jadwal_bulanan == 0) data-width="0%"
                                                         @elseif ($data->tidak_hadir == 0)
                                                             data-width="0%"
                                                         @else
-                                                            data-width="{{ ($data->tidak_hadir / $data->terlaksana) * 100 }}%" @endif
+                                                            data-width="{{ round(($data->tidak_hadir / $data->jadwal_bulanan) * 100) }}%" @endif
                                                                 {{-- Value Now --}}
-                                                                @if ($data->terlaksana == 0) aria-valuenow="0"
+                                                                @if ($data->jadwal_bulanan == 0) aria-valuenow="0"
                                                         @elseif ($data->tidak_hadir == 0)
                                                             aria-valuenow="0"
                                                         @else
-                                                            aria-valuenow="{{ ($data->tidak_hadir / $data->terlaksana) * 100 }}" @endif
+                                                            aria-valuenow="{{ round(($data->tidak_hadir / $data->jadwal_bulanan) * 100) }}" @endif
                                                                 aria-valuemin="0" aria-valuemax="100"
                                                                 style="width: 80%;">
                                                             </div>
