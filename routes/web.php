@@ -1,17 +1,20 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MapelController;
+use App\Http\Controllers\MesinController;
 use App\Http\Controllers\PesanController;
 use App\Http\Controllers\JadwalController;
-use App\Http\Controllers\MesinController;
 use App\Http\Controllers\PresensiController;
-use App\Http\Controllers\PengaturanController;
 use App\Http\Controllers\WhatsappController;
+use App\Http\Controllers\PengaturanController;
+use App\Models\vabsenbulanan;
+use App\Models\vabsenkeseluruhan;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +28,25 @@ use App\Http\Controllers\WhatsappController;
 */
 
 Route::get('/', function () {
-    return view('dashboard');
+    return view('dashboard', [
+
+        // GTK Count
+        'gtk'       => User::where('role', 'Guru')->count(),
+        'sd'        => User::where('role', 'Guru')->where('unit', 'SD Bakti Nusantara 666')->count(),
+        'smp'       => User::where('role', 'Guru')->where('unit', 'SMP Bakti Nusantara 666')->count(),
+        'smk'       => User::where('role', 'Guru')->where('unit', 'SMK Bakti Nusantara 666')->count(),
+
+        // GTK Percentage Bulanan
+        'sd_percentage'     => vabsenbulanan::where('unit_users', 'SD Bakti Nusantara 666')->first(),
+        'smp_percentage'    => vabsenbulanan::where('unit_users', 'SMP Bakti Nusantara 666')->first(),
+        'smk_percentage'    => vabsenbulanan::where('unit_users', 'SMK Bakti Nusantara 666')->first(),
+
+        // GTK Percentage Keseluruhan
+        'sd_percentage_all'     => vabsenkeseluruhan::where('unit_users', 'SD Bakti Nusantara 666')->first(),
+        'smp_percentage_all'    => vabsenkeseluruhan::where('unit_users', 'SMP Bakti Nusantara 666')->first(),
+        'smk_percentage_all'    => vabsenkeseluruhan::where('unit_users', 'SMK Bakti Nusantara 666')->first()
+
+    ]);
 });
 
 Auth::routes();
