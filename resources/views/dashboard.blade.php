@@ -95,7 +95,7 @@
                                         <h4>Total GTK</h4>
                                     </div>
                                     <div class="card-body">
-                                        140
+                                        {{ $gtk }}
                                     </div>
                                 </div>
                             </div>
@@ -110,7 +110,7 @@
                                         <h4>SD</h4>
                                     </div>
                                     <div class="card-body">
-                                        34
+                                        {{ $sd }}
                                     </div>
                                 </div>
                             </div>
@@ -125,7 +125,7 @@
                                         <h4>SMP</h4>
                                     </div>
                                     <div class="card-body">
-                                        42
+                                        {{ $smp }}
                                     </div>
                                 </div>
                             </div>
@@ -140,7 +140,7 @@
                                         <h4>SMK</h4>
                                     </div>
                                     <div class="card-body">
-                                        84
+                                        {{ $smk }}
                                     </div>
                                 </div>
                             </div>
@@ -148,77 +148,187 @@
                     </div>
 
                     <div class="row">
+
+                        {{-- Bulanan --}}
                         <div class="col-lg-6 col-md-6 col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4>Grafik Kehadiran Guru Hari Ini</h4>
+                                    <h4>Grafik Kehadiran Guru Bulan Ini</h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="mb-4">
-                                        <div class="text-small float-right font-weight-bold text-muted">75%</div>
+                                        <div class="text-small float-right font-weight-bold text-muted">
+                                            @if ($sd_percentage->jadwal == 0)
+                                                0%
+                                            @else
+                                                {{ round(($sd_percentage->hadir / $sd_percentage->jadwal) * 100) }}%
+                                            @endif
+                                        </div>
                                         <div class="font-weight-bold mb-1">SD Bakti Nusantara 666</div>
                                         <div class="progress" data-height="3" style="height: 3px;">
-                                            <div class="progress-bar" role="progressbar" data-width="75%"
-                                                aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
-                                                style="width: 80%;"></div>
+                                            <div
+                                            class="progress-bar"
+                                            role="progressbar"
+                                            aria-valuenow="80"
+                                            aria-valuemin="0"
+                                            aria-valuemax="100"
+                                            style="width: 80%;"
+                                            data-width="
+                                            @if ($sd_percentage->jadwal == 0)
+                                                0%
+                                            @else
+                                                {{ round(($sd_percentage->hadir / $sd_percentage->jadwal) * 100) }}%
+                                            @endif
+                                            "
+                                            ></div>
                                         </div>
                                     </div>
 
                                     <div class="mb-4">
-                                        <div class="text-small float-right font-weight-bold text-muted">65%</div>
+                                        <div class="text-small float-right font-weight-bold text-muted">
+                                            @if ($smp_percentage->jadwal == 0)
+                                                0%
+                                            @else
+                                                {{ round(($smp_percentage->hadir / $smp_percentage->jadwal) * 100) }}%
+                                            @endif
+                                        </div>
                                         <div class="font-weight-bold mb-1">SMP Bakti Nusantara 666</div>
                                         <div class="progress" data-height="3" style="height: 3px;">
-                                            <div class="progress-bar" role="progressbar" data-width="66%"
-                                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"
-                                                style="width: 67%;"></div>
+                                            <div
+                                            class="progress-bar"
+                                            role="progressbar"
+                                            aria-valuenow="80"
+                                            aria-valuemin="0"
+                                            aria-valuemax="100"
+                                            style="width: 80%;"
+                                            data-width="
+                                            @if ($smp_percentage->jadwal == 0)
+                                                0%
+                                            @else
+                                                {{ round(($smp_percentage->hadir / $smp_percentage->jadwal) * 100) }}%
+                                            @endif
+                                            "></div>
                                         </div>
                                     </div>
 
                                     <div class="mb-4">
-                                        <div class="text-small float-right font-weight-bold text-muted">70%</div>
+                                        <div class="text-small float-right font-weight-bold text-muted">
+                                            @if ($smk_percentage->jadwal == 0)
+                                                0%
+                                            @else
+                                                {{ round(($smk_percentage->hadir / $smk_percentage->jadwal) * 100) }}%
+                                            @endif
+                                        </div>
                                         <div class="font-weight-bold mb-1">SMK Bakti Nusantara 666</div>
                                         <div class="progress" data-height="3" style="height: 3px;">
-                                            <div class="progress-bar" role="progressbar" data-width="70%"
-                                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"
-                                                style="width: 58%;"></div>
+                                            <div
+                                            class="progress-bar"
+                                            role="progressbar"
+                                            aria-valuenow="80"
+                                            aria-valuemin="0"
+                                            aria-valuemax="100"
+                                            style="width: 80%;"
+                                            data-width="
+                                            @if ($smk_percentage->jadwal == 0)
+                                                0%
+                                            @else
+                                                {{ round(($smk_percentage->hadir / $smk_percentage->jadwal) * 100) }}%
+                                            @endif
+                                            "></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        {{-- Semester --}}
                         <div class="col-lg-6 col-md-6 col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4>Grafik Kehadiran Guru Minggu ini</h4>
+                                    <h4>Grafik Kehadiran Guru Semester ini</h4>
                                 </div>
                                 <div class="card-body">
                                     <div class="mb-4">
-                                        <div class="text-small float-right font-weight-bold text-muted">98%</div>
+                                        <div class="text-small float-right font-weight-bold text-muted">
+                                            @if ($sd_percentage_all->jadwal == 0)
+                                                0%
+                                            @else
+                                                {{ round(($sd_percentage_all->hadir / $sd_percentage_all->jadwal) * 100) }}%
+                                            @endif
+                                        </div>
                                         <div class="font-weight-bold mb-1">SD Bakti Nusantara 666</div>
                                         <div class="progress" data-height="3" style="height: 3px;">
-                                            <div class="progress-bar" role="progressbar" data-width="98%"
-                                                aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
-                                                style="width: 80%;"></div>
+                                            <div
+                                            class="progress-bar"
+                                            role="progressbar"
+                                            aria-valuenow="80"
+                                            aria-valuemin="0"
+                                            aria-valuemax="100"
+                                            style="width: 80%;"
+                                            data-width="
+                                            @if ($sd_percentage_all->jadwal == 0)
+                                                0%
+                                            @else
+                                                {{ round(($sd_percentage_all->hadir / $sd_percentage_all->jadwal) * 100) }}%
+                                            @endif
+                                            "
+                                            ></div>
                                         </div>
                                     </div>
 
                                     <div class="mb-4">
-                                        <div class="text-small float-right font-weight-bold text-muted">100%</div>
+                                        <div class="text-small float-right font-weight-bold text-muted">
+                                            @if ($smp_percentage_all->jadwal == 0)
+                                                0%
+                                            @else
+                                                {{ round(($smp_percentage_all->hadir / $smp_percentage_all->jadwal) * 100) }}%
+                                            @endif
+                                        </div>
                                         <div class="font-weight-bold mb-1">SMP Bakti Nusantara 666</div>
                                         <div class="progress" data-height="3" style="height: 3px;">
-                                            <div class="progress-bar" role="progressbar" data-width="100%"
-                                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"
-                                                style="width: 67%;"></div>
+                                            <div
+                                            class="progress-bar"
+                                            role="progressbar"
+                                            aria-valuenow="80"
+                                            aria-valuemin="0"
+                                            aria-valuemax="100"
+                                            style="width: 80%;"
+                                            data-width="
+                                            @if ($smp_percentage_all->jadwal == 0)
+                                                0%
+                                            @else
+                                                {{ round(($smp_percentage_all->hadir / $smp_percentage_all->jadwal) * 100) }}%
+                                            @endif
+                                            "
+                                            ></div>
                                         </div>
                                     </div>
 
                                     <div class="mb-4">
-                                        <div class="text-small float-right font-weight-bold text-muted">80%</div>
+                                        <div class="text-small float-right font-weight-bold text-muted">
+                                            @if ($smk_percentage_all->jadwal == 0)
+                                                0%
+                                            @else
+                                                {{ round(($smk_percentage_all->hadir / $smk_percentage_all->jadwal) * 100) }}%
+                                            @endif
+                                        </div>
                                         <div class="font-weight-bold mb-1">SMK Bakti Nusantara 666</div>
                                         <div class="progress" data-height="3" style="height: 3px;">
-                                            <div class="progress-bar" role="progressbar" data-width="80%"
-                                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"
-                                                style="width: 58%;"></div>
+                                            <div
+                                            class="progress-bar"
+                                            role="progressbar"
+                                            aria-valuenow="80"
+                                            aria-valuemin="0"
+                                            aria-valuemax="100"
+                                            style="width: 80%;"
+                                            data-width="
+                                            @if ($smk_percentage_all->jadwal == 0)
+                                                0%
+                                            @else
+                                                {{ round(($smk_percentage_all->hadir / $smk_percentage_all->jadwal) * 100) }}%
+                                            @endif
+                                            "
+                                            ></div>
                                         </div>
                                     </div>
 
@@ -237,16 +347,20 @@
                             <div class="card p-3">
                                 <p class="font-weight-bold text-primary pt-3 h6 mx-2">About us</p>
                                 <hr>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit qui voluptas voluptates
-                                    exercitationem, necessitatibus optio! Dolore quis atque, velit non voluptas eos
-                                    dicta, eveniet saepe deleniti ex suscipit ratione voluptates! Aperiam corporis
-                                    officiis impedit deleniti amet, odit voluptatum. Aliquid temporibus blanditiis rem,
-                                    assumenda sunt vitae repudiandae, quas ratione illo, odio eius dolorem quae ullam
-                                    quam vel ea quaerat eum explicabo dignissimos quis voluptatem quo earum dolore?
-                                    Dignissimos, ipsam nihil ducimus asperiores atque voluptatum maiores eveniet
-                                    doloremque voluptates ea sunt dicta earum magnam. Quam ipsa laboriosam et soluta
-                                    labore natus quod veritatis, libero quae, officia distinctio commodi aliquam culpa
-                                    perferendis ipsam.</p>
+                                <p>
+                                    SIMBA (Sistem Presensi Informasi Bakti Nusantara) merupakan sebuah aplikasi berbasis website yang dibuat dengan tujuan monitoring atau memantau persentase Tenaga pendidik di SD, SMP, dan SMK Bakti Nusantara 666. SIMBA sudah terhubung dengan mesin fingerprint sehingga data absensi tenaga pendidik SD, SMP, dan SMK Bakti Nusantara 666 sudah bisa di monitoring, di kelola, dan di presentasikan secara otomatis.
+                                    <div class="row mt-5">
+                                        <div class="col-4 text-center">
+                                            <img src="{{ asset("images/assets/Laravel.png") }}" width="50%">
+                                        </div>
+                                        <div class="col-4 text-center">
+                                            <img src="{{ asset("images/assets/Bootstrap.png") }}" width="50%">
+                                        </div>
+                                        <div class="col-4 text-center">
+                                            <img src="{{ asset("images/assets/JQuery.png") }}" width="50%">
+                                        </div>
+                                    </div>
+                                </p>
                             </div>
                         </div>
                     </div>
