@@ -10,6 +10,7 @@ use App\Http\Controllers\MapelController;
 use App\Http\Controllers\MesinController;
 use App\Http\Controllers\PesanController;
 use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\WhatsappController;
 use App\Http\Controllers\PengaturanController;
@@ -157,6 +158,10 @@ Route::group(['middleware' => 'auth'], function () {
 
         // Mesin Fingerprint
         Route::get('/mesin', [MesinController::class, 'index'])->name('pengaturan.mesin.index');
+
+        // Maintenance
+        Route::get('/maintenance', [MaintenanceController::class, 'index'])->name('pengaturan.maintenance.index');
+        Route::get('/maintenance/create', [MaintenanceController::class, 'create'])->name('pengaturan.maintenance.create');
 
     });
 
