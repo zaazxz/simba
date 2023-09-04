@@ -8,8 +8,8 @@
         {{-- Logo --}}
         <div class="sidebar-brand">
             <a href="/">
-                <img src="{{ asset('Logo SIMBA/Logo (2)/main-logo (2).png') }}" alt="IPA"
-                    style="margin-top: 10px" width="100px">
+                <img src="{{ asset('Logo SIMBA/Logo (2)/main-logo (2).png') }}" alt="IPA" style="margin-top: 10px"
+                    width="100px">
             </a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
@@ -25,8 +25,7 @@
                 {{-- Data Master --}}
                 <li>
                 <li
-                    class="dropdown {{
-                    str_contains($url, 'tatausaha') ||
+                    class="dropdown {{ str_contains($url, 'tatausaha') ||
                     str_contains($url, 'guru') ||
                     str_contains($url, 'jadwal') ||
                     str_contains($url, 'mapel') ||
@@ -69,7 +68,8 @@
                             <i class="fa-solid fa-person-chalkboard"></i> <span>Presensi</span>
                         </a>
                         <ul class="dropdown-menu" style="display: none;">
-                            <li class="{{ str_contains($url, 'keseluruhan') || str_contains($url, 'bulanan') ? 'active' : '' }}">
+                            <li
+                                class="{{ str_contains($url, 'keseluruhan') || str_contains($url, 'bulanan') ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ route('presensi.keseluruhan') }}">Data Presensi</a>
                             </li>
                             <li class="{{ str_contains($url, 'hadir') ? 'active' : '' }}">
@@ -105,7 +105,11 @@
                     {{-- Pengaturan --}}
                     <li>
                     <li
-                        class="dropdown {{ str_contains($url, 'whatsapp') || str_contains($url, 'mesin') || str_contains($url, 'user')
+                        class="dropdown {{
+                        str_contains($url, 'whatsapp') ||
+                        str_contains($url, 'mesin') ||
+                        str_contains($url, 'user') ||
+                        str_contains($url, 'maintenance')
                             ? 'show active'
                             : '' }}">
                         <a href="" class="nav-link has-dropdown">
@@ -113,13 +117,17 @@
                         </a>
                         <ul class="dropdown-menu" style="display: none;">
                             <li class="{{ str_contains($url, 'whatsapp') ? 'active' : '' }}">
-                                <a class="nav-link" href="{{ route('pengaturan.whatsapp.index') }}">Whatsapp Gateway</a>
+                                <a class="nav-link" href="{{ route('pengaturan.whatsapp.index') }}">Whatsapp
+                                    Gateway</a>
                             </li>
                             <li class="{{ str_contains($url, 'mesin') ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ route('pengaturan.mesin.index') }}">Mesin Fingerprint</a>
                             </li>
                             <li class="{{ str_contains($url, 'user') ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ route('pengaturan.user.index') }}">Pengguna</a>
+                            </li>
+                            <li class="{{ str_contains($url, 'maintenance') ? 'active' : '' }}">
+                                <a class="nav-link" href="{{ route('pengaturan.maintenance.index') }}">Maintenance</a>
                             </li>
                         </ul>
                     </li>
