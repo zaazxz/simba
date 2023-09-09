@@ -43,32 +43,25 @@
                                                 <th>No</th>
                                                 <th>Versi Website</th>
                                                 <th>Tanggal Update</th>
-                                                <th>Apa yang baru?</th>
+                                                <th>Update Oleh</th>
                                                 <th> </th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($data as $data)
+                                            @foreach ($datas as $data)
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $data->version }}</td>
-                                                    <td>{{ $data->updated_date }}</td>
-                                                    <td>{{ $data->new_feature }}</td>
+                                                    <td>V{{ $data->updateBesar }}.{{ $data->updateKecil }}</td>
+                                                    <td>{{ $data->updatePada }}</td>
+                                                    <td>{{ $data->updateOleh }}</td>
                                                     <td>
-                                                        <a class="btn btn btn-warning btn-flat my-1" data-toggle="tooltip"
-                                                            title='Edit'
-                                                            href="#">
-                                                            <i class="fas fa-pencil-alt"></i>
-                                                        </a>
-                                                        <a class="btn btn btn-danger btn-flat my-1" data-toggle="tooltip"
-                                                            title='Delete'
-                                                            href="#">
-                                                            <i class="fa fa-trash"></i>
-                                                        </a>
-                                                        <a class="btn btn btn-primary btn-flat my-1" data-toggle="tooltip"
-                                                            title='Detail'
-                                                            href="#">
+                                                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                            data-target="#versi{{ $data->id }}">
                                                             <i class="fa fa-info"></i>
+                                                        </button>
+                                                        <a class="btn btn btn-danger btn-flat my-1" data-toggle="tooltip"
+                                                            title='Delete' href="#">
+                                                            <i class="fa fa-trash"></i>
                                                         </a>
                                                     </td>
                                                 </tr>
@@ -82,7 +75,33 @@
                 </div>
             </div>
         </section>
+
+        @foreach ($datas as $data)
+            {{-- Modal --}}
+            <div class="modal fade" id="versi{{ $data->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Detail Versi v{{ $data->updateBesar }}.{{ $data->updateKecil }}
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            {!! $data->updateFitur !!}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+
     </div>
+
 @endsection
 
 @section('script')

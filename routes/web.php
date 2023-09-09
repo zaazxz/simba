@@ -53,10 +53,12 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-// Ajax Jquery
+// Ajax Jquery Route
 Route::post('/getkabupaten', [UserController::class, 'kabkota'])->name('getkabupaten');
 Route::post('/getkecamatan', [UserController::class, 'kecamatan'])->name('getkecamatan');
 Route::post('/getkelurahan', [UserController::class, 'kelurahan'])->name('getkelurahan');
+
+Route::get('/getvaluebigupdate', [MaintenanceController::class, 'bigUpdate'])->name('getvaluebigupdate');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::prefix('gtk')->group(function () {
@@ -162,6 +164,8 @@ Route::group(['middleware' => 'auth'], function () {
         // Maintenance
         Route::get('/maintenance', [MaintenanceController::class, 'index'])->name('pengaturan.maintenance.index');
         Route::get('/maintenance/create', [MaintenanceController::class, 'create'])->name('pengaturan.maintenance.create');
+        Route::post('/maintenance/bigstore', [MaintenanceController::class, 'bigUpdateStore'])->name('pengaturan.maintenance.bigupdate.store');
+        Route::post('/maintenance/smallstore', [MaintenanceController::class, 'smallUpdateStore'])->name('pengaturan.maintenance.smallupdate.store');
 
     });
 

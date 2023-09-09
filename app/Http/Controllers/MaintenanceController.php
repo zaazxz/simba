@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Maintenance;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MaintenanceController extends Controller
 {
@@ -13,7 +15,7 @@ class MaintenanceController extends Controller
     {
         return view('backend.pengaturan.maintenance.index', [
             'title' => 'Maintenance Website',
-            'data'  => Maintenance::all()
+            'datas'  => Maintenance::all()
         ]);
     }
 
@@ -21,19 +23,72 @@ class MaintenanceController extends Controller
     public function create()
     {
         return view('backend.pengaturan.maintenance.create', [
-            'title' => 'Update Versi Website',
+            'title'     => 'Update Versi Website',
+            'waktu'     => Carbon::today()->toDateString()
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    // Get Value Big Update
+    public function bigUpdate() {
+        $data = Maintenance::latest()->first();
+        return response()->json($data);
+    }
+
+    // Store
+    public function bigUpdateStore(Request $request)
     {
-        //
+
+        $latestData = Maintenance::latest()->first();
+
+        $maintain = new Maintenance();
+        $maintain->updateFitur  = $request->updateFitur;
+
+        // Update Besar
+        if ($request->updateBesar > $latestData->updateBesar) {
+            $maintain->updateBesar  = $request->updateBesar;
+        } else {
+            return redirect()->route('pengaturan.maintenance.index')->with('message', 'Update Versi gagal');
+        }
+
+        $maintain->updateKecil  = 00;
+        $maintain->updateOleh   = Auth::user()->name;
+        $maintain->updatePada   = Carbon::now();
+
+        $maintain->save();
+
+        if ($maintain) {
+            return redirect()->route('pengaturan.maintenance.index')->with('message', 'Update Versi berhasil');
+        } else {
+            return redirect()->route('pengaturan.maintenance.index')->with('message', 'Update Versi gagal');
+        }
+    }
+
+    public function smallUpdateStore(Request $request)
+    {
+
+        $latestData = Maintenance::latest()->first();
+
+        $maintain = new Maintenance();
+        $maintain->updateFitur  = $request->updateFiturKecil;
+        $maintain->updateBesar  = $latestData->updateBesar;
+
+        // Update Kecil
+        if ($request->updateKecil > $latestData->updateKecil) {
+            $maintain->updateKecil  = $request->updateKecil;
+        } else {
+            return redirect()->route('pengaturan.maintenance.index')->with('message', 'Update Versi gagal');
+        }
+
+        $maintain->updateOleh   = Auth::user()->name;
+        $maintain->updatePada   = Carbon::now();
+
+        $maintain->save();
+
+        if ($maintain) {
+            return redirect()->route('pengaturan.maintenance.index')->with('message', 'Update Versi berhasil');
+        } else {
+            return redirect()->route('pengaturan.maintenance.index')->with('message', 'Update Versi gagal');
+        }
     }
 
     /**

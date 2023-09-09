@@ -42,6 +42,8 @@
     <link rel="stylesheet" type="text/css"
         href="https://cdn.datatables.net/fixedcolumns/4.0.2/css/fixedColumns.dataTables.min.css">
 
+    @yield('css')
+
     <!-- Start GA -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
     <script>
