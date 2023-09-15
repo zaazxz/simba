@@ -116,6 +116,7 @@
     </script>
     <script type="text/javascript" charset="utf8"
         src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/js/bootstrap-timepicker.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page Specific JS File -->
     {{-- @include('sweetalert::alert') --}}

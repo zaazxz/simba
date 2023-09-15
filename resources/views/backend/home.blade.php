@@ -64,6 +64,7 @@
 
         {{-- View Admin --}}
         @if (auth()->user()->role == 'Admin')
+
             {{-- Presensi Terkini --}}
             <div class="row">
                 <div class="col-lg-6 col-md-12 col-12 col-sm-12">
@@ -80,13 +81,15 @@
                                         <li class="list-group-item">
                                             <div class="row">
                                                 <div class="col-4 font-weight-bolder">Hadir</div>
-                                                <div class="col-8 font-weight-bolder">: <span class="text-primary">0</span></div>
+                                                <div class="col-8 font-weight-bolder">: <span class="text-primary">{{ $hadirToday }}</span>
+                                                </div>
                                             </div>
                                         </li>
                                         <li class="list-group-item">
                                             <div class="row">
                                                 <div class="col-4 font-weight-bolder">Tidak Hadir</div>
-                                                <div class="col-8 font-weight-bolder">: <span class="text-danger">0</span></div>
+                                                <div class="col-8 font-weight-bolder">: <span class="text-danger">{{ $tidakHadirToday }}</span>
+                                                </div>
                                             </div>
                                         </li>
                                     </ul>
@@ -113,16 +116,19 @@
                                         <li class="list-group-item">
                                             <div class="row">
                                                 <div class="col-4 font-weight-bolder">Tanggal Hari Ini</div>
-                                                <div class="col-8 font-weight-bolder">: <span class="text-primary">Kamis / 11 - 22 - 2023</span></div>
+                                                <div class="col-8 font-weight-bolder">: <span class="text-primary">{!! $hari !!} /
+                                                        {{ $tgl }}</span></div>
                                             </div>
                                         </li>
                                         <li class="list-group-item">
                                             <div class="row">
                                                 <div class="col-4 font-weight-bolder">Belum Absen</div>
-                                                <div class="col-8 font-weight-bolder">: <span class="text-danger">0</span></div>
+                                                <div class="col-8 font-weight-bolder">: <span class="text-danger">{{ $confirmToday }}</span>
+                                                </div>
                                             </div>
                                         </li>
-                                    </ul></div>
+                                    </ul>
+                                </div>
                                 <div class="text-center">
                                     <a href="{{ route('presensi.konfirmasi') }}" class="btn btn-primary btn-lg btn-block">
                                         Lihat Semua
@@ -155,8 +161,8 @@
                                 </div>
                                 <div class="font-weight-bold mb-1">SD Bakti Nusantara 666</div>
                                 <div class="progress" data-height="3" style="height: 3px;">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="80"
-                                        aria-valuemin="0" aria-valuemax="100" style="width: 80%;"
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0"
+                                        aria-valuemax="100" style="width: 80%;"
                                         data-width="
                                     @if ($sd_percentage->jadwal == 0) 0%
                                     @else
@@ -176,8 +182,8 @@
                                 </div>
                                 <div class="font-weight-bold mb-1">SMP Bakti Nusantara 666</div>
                                 <div class="progress" data-height="3" style="height: 3px;">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="80"
-                                        aria-valuemin="0" aria-valuemax="100" style="width: 80%;"
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0"
+                                        aria-valuemax="100" style="width: 80%;"
                                         data-width="
                                     @if ($smp_percentage->jadwal == 0) 0%
                                     @else
@@ -197,8 +203,8 @@
                                 </div>
                                 <div class="font-weight-bold mb-1">SMK Bakti Nusantara 666</div>
                                 <div class="progress" data-height="3" style="height: 3px;">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="80"
-                                        aria-valuemin="0" aria-valuemax="100" style="width: 80%;"
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0"
+                                        aria-valuemax="100" style="width: 80%;"
                                         data-width="
                                     @if ($smk_percentage->jadwal == 0) 0%
                                     @else
@@ -214,7 +220,7 @@
 
             {{-- View Guru --}}
         @elseif (auth()->user()->role == 'Guru')
-            {{-- Persentase Kehadiran --}}
+            {{-- Persentase Kehadiran Guru (Logged In) --}}
             <div class="row">
                 <div class="col-12">
                     <div class="card">
@@ -312,5 +318,137 @@
                     </div>
                 </div>
             </div>
+
         @endif
-    @endsection
+
+        {{-- Card Guru SMK Terbaik --}}
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Guru SMK Terbaik Bulan ini</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+
+                            {{-- Table Guru SMK --}}
+                            <div class="clearfix mb-3"></div>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered" style="width: 100%">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama Guru</th>
+                                            <th>Jadwal Bulanan</th>
+                                            <th>Hadir</th>
+                                            <th>Tidak Hadir</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($bestTeacherSMK as $data)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $data->nama }}</td>
+                                                <td>{{ $data->jadwal }}</td>
+                                                <td>{{ $data->hadir }}</td>
+                                                <td>{{ $data->tidak_hadir }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Card Guru SMP Terbaik --}}
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Guru SMP Terbaik Bulan ini</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+
+                            {{-- Table Guru SMK --}}
+                            <div class="clearfix mb-3"></div>
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered" style="width: 100%">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama Guru</th>
+                                            <th>Jadwal Bulanan</th>
+                                            <th>Hadir</th>
+                                            <th>Tidak Hadir</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($bestTeacherSMP as $data)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $data->nama }}</td>
+                                                <td>{{ $data->jadwal }}</td>
+                                                <td>{{ $data->hadir }}</td>
+                                                <td>{{ $data->tidak_hadir }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Card Guru SMP Terbaik --}}
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Guru SD Terbaik Bulan ini</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+
+                            {{-- Table Guru SMK --}}
+                            <div class="clearfix mb-3"></div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped" style="width: 100%">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama Guru</th>
+                                            <th>Jadwal Bulanan</th>
+                                            <th>Hadir</th>
+                                            <th>Tidak Hadir</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($bestTeacherSD as $data)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $data->nama }}</td>
+                                                <td>{{ $data->jadwal }}</td>
+                                                <td>{{ $data->hadir }}</td>
+                                                <td>{{ $data->tidak_hadir }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+@endsection

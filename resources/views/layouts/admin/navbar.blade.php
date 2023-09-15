@@ -29,9 +29,21 @@
                 class="dropdown-item has-icon">
                     <i class="far fa-user"></i> Profile
                 </a>
-                <a href="" class="dropdown-item has-icon">
+
+                @if (Auth::user()->role == 'Guru')
+                <a href="{{ route('guru.changepassword', ['code' =>Auth::user()->code]) }}" class="dropdown-item has-icon">
                     <i class="fas fa-cog"></i> Change Password
                 </a>
+                @elseif (Auth::user()->role == 'Tata Usaha')
+                <a href="{{ route('stu.changepassword', ['code' =>Auth::user()->code]) }}" class="dropdown-item has-icon">
+                    <i class="fas fa-cog"></i> Change Password
+                </a>
+                @else
+                <a href="{{ route('guru.changepassword', ['code' =>Auth::user()->code]) }}" class="dropdown-item has-icon">
+                    <i class="fas fa-cog"></i> Change Password
+                </a>
+                @endif
+
                 <div class="dropdown-divider"></div>
                 <a href="{{ route('logout') }}"
                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
