@@ -14,6 +14,7 @@ use App\Http\Controllers\MaintenanceController;
 use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\WhatsappController;
 use App\Http\Controllers\PengaturanController;
+use App\Models\Maintenance;
 use App\Models\vabsenbulanan;
 use App\Models\vabsenkeseluruhan;
 
@@ -45,7 +46,11 @@ Route::get('/', function () {
         // GTK Percentage Keseluruhan
         'sd_percentage_all'     => vabsenkeseluruhan::where('unit_users', 'SD Bakti Nusantara 666')->first(),
         'smp_percentage_all'    => vabsenkeseluruhan::where('unit_users', 'SMP Bakti Nusantara 666')->first(),
-        'smk_percentage_all'    => vabsenkeseluruhan::where('unit_users', 'SMK Bakti Nusantara 666')->first()
+        'smk_percentage_all'    => vabsenkeseluruhan::where('unit_users', 'SMK Bakti Nusantara 666')->first(),
+
+        // Maintaining
+        'data_maintain'         => Maintenance::all(),
+        'latest_maintain'       => Maintenance::latest()->first()
 
     ]);
 });
