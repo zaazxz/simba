@@ -76,6 +76,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/store', [UserController::class, 'store'])->name('guru.store');
         Route::get('/delete/{code}', [UserController::class, 'destroy'])->name('guru.destroy');
         Route::get('/status/{code}', [UserController::class, 'status'])->name('guru.status');
+        Route::get('/changepassword/{code}', [UserController::class, 'guruChangePassword'])->name('guru.changepassword');
 
         // Route for Tata Usaha
         Route::get('/stu', [UserController::class, 'tatausaha'])->name('tatausaha.index');
@@ -85,6 +86,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::put('/updatetu/{code}', [UserController::class, 'stu_update'])->name('tatausaha.update');
         Route::get('/deletetu/{code}', [UserController::class, 'stu_destroy'])->name('tatausaha.destroy');
         Route::get('/statustu/{code}', [UserController::class, 'stu_status'])->name('tatausaha.status');
+        Route::get('/stuchangepassword/{code}', [UserController::class, 'stuChangePassword'])->name('stu.changepassword');
+
+        // Route for all GTK
+        Route::post('/change-password', [UserController::class, 'changePassword'])->name('change.password');
 
     });
 

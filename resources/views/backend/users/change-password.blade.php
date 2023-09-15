@@ -41,38 +41,38 @@
                                 <div class="alert alert-danger">{{ $error }}</div>
                             @endforeach
                         @endif
-                        <form action="{{ route('changePasswordPost') }}" method="POST">
+                        <form action="{{ route('change.password') }}" method="POST">
                             {{ csrf_field() }}
                             <div class="card-body">
-                                <div class="form-group row mb-4{{ $errors->has('current-password') ? ' has-error' : '' }}">
+                                <div class="form-group row mb-4{{ $errors->has('current_password') ? ' has-error' : '' }}">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Password saat ini</label>
                                     <div class="col-sm-12 col-md-7">
-                                        <input id="current-password" type="password"class="form-control" name="current-password" required>
-                                        @if ($errors->has('current-password'))
+                                        <input id="current_password" type="password"class="form-control" name="current_password" required>
+                                        @if ($errors->has('current_password'))
                                         <span class="help-block">
-                                            <strong>{{ $errors->first('current-password') }}</strong>
+                                            <strong>{{ $errors->first('current_password') }}</strong>
                                         </span>
                                     @endif
                                     </div>
                                 </div>
-                                <div class="form-group row mb-4{{ $errors->has('new-password') ? ' has-error' : '' }}">
+                                <div class="form-group row mb-4{{ $errors->has('new_password') ? ' has-error' : '' }}">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Password Baru</label>
                                     <div class="col-sm-12 col-md-7">
-                                        <input id="new-password" type="password"class="form-control" name="new-password" required>
-                                        @if ($errors->has('new-password'))
+                                        <input id="new_password" type="password"class="form-control" name="new_password" required>
+                                        @if ($errors->has('new_password'))
                                         <span class="help-block">
-                                            <strong>{{ $errors->first('new-password') }}</strong>
+                                            <strong>{{ $errors->first('new_password') }}</strong>
                                         </span>
                                     @endif
                                     </div>
                                 </div>
-                                <div class="form-group row mb-4{{ $errors->has('new-password-confirm') ? ' has-error' : '' }}">
+                                <div class="form-group row mb-4{{ $errors->has('new_password_confirm') ? ' has-error' : '' }}">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Konfirmasi Password Baru</label>
                                     <div class="col-sm-12 col-md-7">
-                                        <input id="new-password_confirmation" type="password"class="form-control" name="new-password_confirmation" required>
-                                        @if ($errors->has('new-password-confirm'))
+                                        <input id="new_password_confirmation" type="password"class="form-control" name="new_password_confirmation" required>
+                                        @if ($errors->has('new_password_confirm'))
                                         <span class="help-block">
-                                            <strong>{{ $errors->first('new-password-confirm') }}</strong>
+                                            <strong>{{ $errors->first('new_password_confirm') }}</strong>
                                         </span>
                                     @endif
                                     </div>
@@ -92,4 +92,26 @@
 </div>
 </section>
 </div>
+@endsection
+
+@section('script')
+
+<script>
+    $(document).ready(function() {
+
+        $('#new_password_confirmation').on('input', function() {
+
+            let newPassword = $('#new_password').val();
+
+            if (newPassword === $('#new_password_confirmation').val()) {
+                $('#new_password_confirmation').removeClass('is-invalid');
+                console.log($('#new_password_confirmation').val());
+            } else {
+                $('#new_password_confirmation').addClass('is-invalid');
+            }
+
+        })
+    });
+</script>
+
 @endsection

@@ -9,6 +9,7 @@ use App\Models\Province;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -20,11 +21,11 @@ class UserController extends Controller
     public function index()
     {
         $data=[
-            'title'     => 'Daftar Staff Pendidik',
-            'teachers'  => User::where('role', '!=', 'Admin')->where('role', '!=', 'Tata usaha')->get(),
-            'teachers_all' => User::where('role', '!=', 'Admin')->where('role', '!=', 'Tata Usaha')->count(),
-            'teachers_ak'  => User::where('role', '!=', 'Admin')->where('role', '!=', 'Tata Usaha')->where('status', '=', '1')->count(),
-            'teachers_pe'  => User::where('role', '!=', 'Admin')->where('role', '!=', 'Tata Usaha')->where('status', '=', '0')->count(),
+            'title'         => 'Daftar Staff Pendidik',
+            'teachers'      => User::where('role', '!=', 'Admin')->where('role', '!=', 'Tata usaha')->get(),
+            'teachers_all'  => User::where('role', '!=', 'Admin')->where('role', '!=', 'Tata Usaha')->count(),
+            'teachers_ak'   => User::where('role', '!=', 'Admin')->where('role', '!=', 'Tata Usaha')->where('status', '=', '1')->count(),
+            'teachers_pe'   => User::where('role', '!=', 'Admin')->where('role', '!=', 'Tata Usaha')->where('status', '=', '0')->count(),
         ];
         return view('backend.users.guru', $data);
     }
@@ -345,4 +346,41 @@ class UserController extends Controller
         }
         echo $option;
     }
+
+    public function guruChangePassword($code) {
+        return view('backend.users.change-password', [
+            'title' => 'Ubah Password',
+            'users' => User::where('code', $code)->first()
+        ]);
+    }
+
+    public function stuChangePassword($code) {
+        return view('backend.users.change-password', [
+            'title' => 'Ubah Password',
+            'users' => User::where('code', $code)->first()
+        ]);
+    }
+
+    public function changePassword(Request $request) {
+
+        // Validation
+        $request->validate([
+            'current_password'  => 'required',
+            'new_password'      => 'required|confirmed',
+        ]);
+
+        // Match The Old Password
+        if(!Hash::check($request->current_password, auth()->user()->password)){
+            return back()->with("error", "Old Password Doesn't match!");
+        }
+
+        // Update the new Password
+        User::whereId(auth()->user()->id)->update([
+            'password' => Hash::make($request->new_password)
+        ]);
+
+        return redirect()->route('home')->with('message', 'Password Berhasil Diubah!');
+
+    }
+
 }
