@@ -511,7 +511,7 @@
                         {{-- Developer tiga --}}
                         <div class="col-lg-4 col-md-4 col-sm-12 col-12">
                             <div class="card p-3 bg-primary">
-                                <div class="text-center pt-1 font-weight-bold">Aldi Adrian</div>
+                                <div class="text-center pt-1 font-weight-bold">Rio andrianto, S.kom., Gr</div>
                                 <hr class="bg-white">
                                 <img src="{{ asset('images/users/avatar-1.png') }}" alt="" width="150px"
                                     class="mx-auto rounded">
@@ -519,7 +519,7 @@
 
                                     {{-- Email --}}
                                     <li class="list-group-item">
-                                        <a href="mailto:mirzaqamaruzzaman18@gmail.com" target="_blank">
+                                        <a href="mailto:r.andrianto@gmail.com" target="_blank">
                                             <div class="row">
 
                                                 {{-- SVG Logo --}}
@@ -542,7 +542,7 @@
 
                                     {{-- Github --}}
                                     <li class="list-group-item">
-                                        <a href="https://github.com/zaazxz" target="_blank">
+                                        <a href="https://github.com/neushepa" target="_blank">
                                             <div class="row">
 
                                                 {{-- SVG Logo --}}
@@ -556,7 +556,7 @@
 
                                                 {{-- Link --}}
                                                 <div class="col-10 font-weight-bold">
-                                                    : Zaazxz
+                                                    : Rio Andrianto
                                                 </div>
 
                                             </div>
@@ -565,7 +565,7 @@
 
                                     {{-- Linkedin --}}
                                     <li class="list-group-item">
-                                        <a href="https://linkedin.com/in/mirzaqamaruzzaman18" target="_blank">
+                                        <a href="https://linkedin.com/in/rioandrianto" target="_blank">
                                             <div class="row">
 
                                                 {{-- SVG Logo --}}
@@ -579,7 +579,7 @@
 
                                                 {{-- Link --}}
                                                 <div class="col-10 font-weight-bold">
-                                                    : Mirza Qamaruzzaman
+                                                    : Rio Andrianto
                                                 </div>
 
                                             </div>
@@ -602,14 +602,13 @@
                                     <li class="list-group-item">
                                         <div class="row">
                                             <div class="col-6 text-center">Versi Mutakhir</div>
-                                            <div class="col-6">: <span class="font-weight-bold">v1.0</span></div>
+                                            <div class="col-6">: <span class="font-weight-bold">V{{ $latest_maintain->updateBesar }}.{{ $latest_maintain->updateKecil }}</span></div>
                                         </div>
                                     </li>
                                     <li class="list-group-item">
                                         <div class="row">
                                             <div class="col-6 text-center">Diupdate Pada</div>
-                                            <div class="col-6">: <span class="font-weight-bold">20 Januari
-                                                    2019</span></div>
+                                            <div class="col-6">: <span class="font-weight-bold">{{ $latest_maintain->updatePada }}</span></div>
                                         </div>
                                     </li>
                                     <li class="list-group-item">
@@ -669,17 +668,19 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>v1.0</td>
-                                    <td>v1.0</td>
-                                    <td>
-                                        <button type="button" class="btn-block btn btn-primary" data-toggle="modal"
-                                            data-target="#ModalWhatsNew">
-                                            Cek Disini!
-                                        </button>
-                                    </td>
-                                </tr>
+                                @foreach ($data_maintain as $data)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>V{{ $data->updateBesar }}.{{ $data->updateKecil }}</td>
+                                        <td>{{ $data->updatePada }}</td>
+                                        <td>
+                                            <button type="button" class="btn-block btn btn-primary"
+                                                data-toggle="modal" data-target="#ModalWhatsNew{{ $data->id }}">
+                                                Cek Disini!
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -691,25 +692,28 @@
         </div>
     </div>
 
-    <div class="modal fade" id="ModalWhatsNew" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">What's New?</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis qui necessitatibus repudiandae libero dolore odit architecto? Autem laboriosam quo libero ratione eligendi accusantium, facilis suscipit quisquam quaerat delectus aperiam, officia corrupti ipsa repellat minima, reiciendis tempore labore! Possimus soluta distinctio illo quam odit, dolores, dicta quasi quas sit beatae ipsam veniam ut quia cum atque cupiditate accusamus enim fuga consectetur voluptate blanditiis fugiat iste architecto. Nobis aspernatur quidem incidunt magnam error, pariatur delectus quo repudiandae fugit quasi doloremque non quaerat ducimus voluptas tenetur sint voluptatibus voluptatem, natus molestias ea, ipsum consectetur quas officiis! Explicabo, modi laboriosam. Exercitationem maiores ipsum expedita.
-                </div>
-                <div class="px-3 pb-3">
-                    <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Close</button>
+    @foreach ($data_maintain as $data)
+        <div class="modal fade" id="ModalWhatsNew{{ $data->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">What's New?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {!! $data->updateFitur !!}
+                    </div>
+                    <div class="px-3 pb-3">
+                        <button type="button" class="btn btn-secondary btn-block"
+                            data-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endforeach
 
     <!-- General JS Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
